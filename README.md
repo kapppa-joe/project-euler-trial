@@ -1,3 +1,4 @@
 # Project euler solution
 
-My attempts in solving some problems in project euler by Python with a TDD approach.
+A repo to store my attempts in solving project euler problems with a TDD approach.
+I started this repo as some practice on TDD.
