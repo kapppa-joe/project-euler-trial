@@ -58,9 +58,20 @@ def is_prime(num: int) -> bool:
     return True
 
 
-def prime_generator(limit) -> int:
+def prime_generator(limit: int) -> int:
     i = 2
     while i < limit:
         if is_prime(i):
             yield i
         i += 1
+
+
+def is_palindromic(string: str) -> bool:
+    if len(string) <= 1:
+        return True
+    else:
+        return (string[0] == string[-1]) and is_palindromic(string[1:-1])
+
+
+def is_palindromic_num(input: int) -> bool:
+    return is_palindromic(str(input))

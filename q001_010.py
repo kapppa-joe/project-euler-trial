@@ -1,4 +1,4 @@
-from util import fib_generator, is_prime
+from util import fib_generator, is_palindromic_num, is_prime
 
 
 def q001(a: int, b: int, limit: int) -> int:
@@ -31,3 +31,11 @@ def q003(n: int) -> int:
             if is_prime(i):
                 largest_candidate_below_sqrt_n = i
     return largest_candidate_below_sqrt_n
+
+
+def q004(digits: int) -> int:
+    # A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+    # Find the largest palindrome made from the product of two 3-digit numbers.
+    upperLimit = 10 ** digits
+    lowerLimit = 10 ** (digits - 1)
+    return max(x * y for x in range(lowerLimit, upperLimit) for y in range(lowerLimit, upperLimit) if is_palindromic_num(x * y))

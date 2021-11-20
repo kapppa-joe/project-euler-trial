@@ -1,4 +1,4 @@
-from util import nth_fib, all_primes_below, is_prime, prime_generator
+from util import nth_fib, all_primes_below, is_prime, prime_generator, is_palindromic, is_palindromic_num
 
 
 def test_nth_fib():
@@ -23,3 +23,28 @@ def test_is_prime():
 
 def test_prime_generator():
     assert list(prime_generator(1000)) == primes_until_1000
+
+
+def test_is_palindromic():
+    assert is_palindromic('') == True
+    assert is_palindromic('A') == True
+    assert is_palindromic('AA') == True
+    assert is_palindromic('AB') == False
+    assert is_palindromic('ABA') == True
+    assert is_palindromic('ABC') == False
+    assert is_palindromic('ABBA') == True
+    assert is_palindromic('ABBC') == False
+    assert is_palindromic('tattarrattat') == True
+
+
+def test_is_palinromic_num():
+    assert is_palindromic_num(1) == True
+    assert is_palindromic_num(2) == True
+    assert is_palindromic_num(10) == False
+    assert is_palindromic_num(11) == True
+    assert is_palindromic_num(12) == False
+    assert is_palindromic_num(343) == True
+    assert is_palindromic_num(345) == False
+    assert is_palindromic_num(3443) == True
+    assert is_palindromic_num(34542) == False
+    assert is_palindromic_num(34543) == True

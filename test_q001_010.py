@@ -1,4 +1,4 @@
-from q001_010 import q001, q002, q003
+from q001_010 import q001, q002, q003, q004
 from test_util import all_primes_below
 
 
@@ -32,3 +32,9 @@ def test_q003():
         largest_factor = next(
             i for i in all_primes_below_10000_desc if test_num % i == 0)
         assert largest_factor == q003(test_num)
+
+
+def test_q004():
+    assert q004(1) == 9
+    assert q004(2) == 9009
+    assert q004(3) == 906609
