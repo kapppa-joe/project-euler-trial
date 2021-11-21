@@ -1,4 +1,4 @@
-from util import nth_fib, all_primes_below, is_prime, prime_generator, is_palindromic, is_palindromic_num
+from util import nth_fib, all_primes_below, is_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm
 
 
 def test_nth_fib():
@@ -48,3 +48,19 @@ def test_is_palinromic_num():
     assert is_palindromic_num(3443) == True
     assert is_palindromic_num(34542) == False
     assert is_palindromic_num(34543) == True
+
+
+def test_gcd():
+    assert gcd(1, 1) == 1
+    assert gcd(3, 5) == 1
+    assert gcd(2, 6) == 2
+    assert gcd(12, 15) == 3
+    assert gcd(60, 144) == 12
+
+
+def test_lcm():
+    assert lcm(1, 1) == 1
+    assert lcm(20, 1) == 20
+    assert lcm(2, 5) == 10
+    assert lcm(12, 15) == 60
+    assert lcm(14, 18) == 126

@@ -1,4 +1,4 @@
-from util import fib_generator, is_palindromic_num, is_prime
+from util import fib_generator, is_palindromic_num, is_prime, lcm
 
 
 def q001(a: int, b: int, limit: int) -> int:
@@ -39,3 +39,12 @@ def q004(digits: int) -> int:
     upperLimit = 10 ** digits
     lowerLimit = 10 ** (digits - 1)
     return max(x * y for x in range(lowerLimit, upperLimit) for y in range(lowerLimit, upperLimit) if is_palindromic_num(x * y))
+
+
+def q005(limit: int) -> int:
+    # 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+    # What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+    acc = 1
+    for i in range(2, limit + 1):
+        acc = lcm(acc, i)
+    return acc
