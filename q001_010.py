@@ -48,3 +48,10 @@ def q005(limit: int) -> int:
     for i in range(2, limit + 1):
         acc = lcm(acc, i)
     return acc
+
+
+def q006(n: int) -> int:
+    # Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+    sqaure_of_sum = sum(i for i in range(1, n + 1)) ** 2
+    sum_of_square = sum(i ** 2 for i in range(1, n + 1))
+    return abs(sqaure_of_sum - sum_of_square)

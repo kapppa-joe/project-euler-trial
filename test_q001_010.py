@@ -1,4 +1,4 @@
-from q001_010 import q001, q002, q003, q004, q005
+from q001_010 import q001, q002, q003, q004, q005, q006
 from test_util import all_primes_below
 
 
@@ -49,3 +49,11 @@ def test_q005():
     assert q005(6) == 60
     assert q005(10) == 2520
     assert q005(20) == 232792560
+
+
+def test_q006():
+    assert q006(1) == 0
+    assert q006(2) == 4
+    assert q006(3) == 22
+    assert q006(10) == 2640
+    assert q006(100) == 25164150
