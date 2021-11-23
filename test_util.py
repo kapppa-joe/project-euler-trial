@@ -1,4 +1,4 @@
-from util import nth_fib, all_primes_below, is_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm
+from util import nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm
 
 
 def test_nth_fib():
@@ -23,6 +23,11 @@ def test_is_prime():
 
 def test_prime_generator():
     assert list(prime_generator(1000)) == primes_until_1000
+
+
+def test_nth_prime():
+    for (index, prime) in enumerate(primes_until_1000):
+        assert nth_prime(index + 1) == prime
 
 
 def test_is_palindromic():

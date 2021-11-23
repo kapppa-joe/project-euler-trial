@@ -59,11 +59,30 @@ def is_prime(num: int) -> bool:
 
 
 def prime_generator(limit: int) -> int:
-    i = 2
+    yield 2
+    i = 3
     while i < limit:
         if is_prime(i):
             yield i
-        i += 1
+        i += 2
+
+
+def nth_prime(n: int) -> int:
+    if n < 1:
+        return None
+    elif n == 1:
+        return 2
+    else:
+        p = 3
+        while n > 1:
+            if is_prime(p):
+                n -= 1
+                if n == 1:
+                    return p
+            p += 2
+
+
+print(list(nth_prime(n) for n in range(100)))
 
 
 def is_palindromic(string: str) -> bool:

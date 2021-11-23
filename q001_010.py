@@ -1,4 +1,4 @@
-from util import fib_generator, is_palindromic_num, is_prime, lcm
+from util import fib_generator, is_palindromic_num, is_prime, lcm, nth_prime
 
 
 def q001(a: int, b: int, limit: int) -> int:
@@ -55,3 +55,8 @@ def q006(n: int) -> int:
     sqaure_of_sum = sum(i for i in range(1, n + 1)) ** 2
     sum_of_square = sum(i ** 2 for i in range(1, n + 1))
     return abs(sqaure_of_sum - sum_of_square)
+
+
+def q007(n: int) -> int:
+    # What is the 10 001st prime number?
+    return nth_prime(n)

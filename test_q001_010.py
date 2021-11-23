@@ -1,4 +1,4 @@
-from q001_010 import q001, q002, q003, q004, q005, q006
+from q001_010 import q001, q002, q003, q004, q005, q006, q007
 from test_util import all_primes_below
 
 
@@ -57,3 +57,10 @@ def test_q006():
     assert q006(3) == 22
     assert q006(10) == 2640
     assert q006(100) == 25164150
+
+
+def test_q007():
+    all_primes_below_1000 = all_primes_below(1000)
+    for (index, prime) in enumerate(all_primes_below_1000):
+        assert q007(index + 1) == prime
+    assert q007(10001) == 104743
