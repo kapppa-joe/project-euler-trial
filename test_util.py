@@ -1,4 +1,4 @@
-from util import nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm
+from util import nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits
 
 
 def test_nth_fib():
@@ -69,3 +69,15 @@ def test_lcm():
     assert lcm(2, 5) == 10
     assert lcm(12, 15) == 60
     assert lcm(14, 18) == 126
+
+
+def test_product():
+    assert product(range(5)) == 0
+    assert product(range(1, 5)) == 24
+    assert product([1, 2, 3, 0, 4]) == 0
+    assert product([-1, -2, -3, 4]) == -24
+
+
+def test_str_to_digits():
+    assert list(str_to_digits("1")) == [1]
+    assert list(str_to_digits("12345")) == [1, 2, 3, 4, 5]

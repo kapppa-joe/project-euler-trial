@@ -1,3 +1,7 @@
+import functools
+from typing import Iterable
+
+
 def is_even(n: int) -> bool:
     return n & 1 == 0
 
@@ -82,9 +86,6 @@ def nth_prime(n: int) -> int:
             p += 2
 
 
-print(list(nth_prime(n) for n in range(100)))
-
-
 def is_palindromic(string: str) -> bool:
     if len(string) <= 1:
         return True
@@ -104,3 +105,13 @@ def gcd(a: int, b: int) -> int:
 
 def lcm(a: int, b: int) -> int:
     return a * b / gcd(a, b)
+
+
+def product(iter: Iterable[int]) -> int:
+    # take an iterable of integers and return the product
+    return functools.reduce(lambda acc, i: acc * i, iter, 1)
+
+
+def str_to_digits(string: str) -> Iterable[int]:
+    # take a numeric string and convert to an Iterable of each digit
+    return (int(char) for char in string)

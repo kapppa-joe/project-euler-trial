@@ -1,4 +1,4 @@
-from q001_010 import q001, q002, q003, q004, q005, q006, q007
+from q001_010 import q001, q002, q003, q004, q005, q006, q007, q008, Q008_constant
 from test_util import all_primes_below
 
 
@@ -64,3 +64,17 @@ def test_q007():
     for (index, prime) in enumerate(all_primes_below_1000):
         assert q007(index + 1) == prime
     assert q007(10001) == 104743
+
+
+def test_q008():
+    assert q008(Q008_constant, 1) == 9
+    assert q008(Q008_constant, 2) == 81
+    assert q008(Q008_constant, 3) == 648
+    assert q008(Q008_constant, 4) == 5832
+    assert q008(Q008_constant, 5) == 40824
+    assert q008(Q008_constant, 13) == 23514624000
+
+    test_string = '999909999'
+    assert q008(test_string, 4) == 6561
+    # expect not to omit the center '0'
+    assert q008(test_string, 5) == 0
