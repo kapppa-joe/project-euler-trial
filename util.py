@@ -63,6 +63,7 @@ def is_prime(num: int) -> bool:
 
 
 def prime_generator(limit: int) -> int:
+    # generate all prime numbers below the limit
     yield 2
     i = 3
     while i < limit:
@@ -98,12 +99,14 @@ def is_palindromic_num(input: int) -> bool:
 
 
 def gcd(a: int, b: int) -> int:
+    # compute the greatest common divisor of two ints
     if b == 0:
         return a
     return gcd(b, a % b)
 
 
 def lcm(a: int, b: int) -> int:
+    # compute the least common factor of two ints
     return a * b / gcd(a, b)
 
 
