@@ -1,6 +1,6 @@
 # Project Euler trial
 
-A repo to store my attempts in solving project euler problems with a TDD and FP approach.
+A repo to store my attempts in solving project Euler problems with a TDD and FP approach.
 
 ## Description
 
