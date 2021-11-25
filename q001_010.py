@@ -1,3 +1,4 @@
+from typing import Optional, Tuple
 from util import fib_generator, is_palindromic_num, is_prime, lcm, nth_prime, product, str_to_digits
 
 
@@ -100,3 +101,27 @@ def q008(string: str, digits: int) -> int:
     if not adj_digits_strings:
         return 0
     return max(product(str_to_digits(digits_string)) for digits_string in adj_digits_strings)
+
+
+def find_triplet(triplet_sum: int) -> Optional[list[Tuple[int, int, int]]]:
+    def c(a: int, b: int) -> int:
+        return triplet_sum - a - b
+
+    candidates_for_a_b = ((a, b)
+                          for b in range(1, triplet_sum // 2)
+                          for a in range(1, b + 1)
+                          if (a ** 2 + b ** 2 == c(a, b) ** 2))
+    if candidates_for_a_b:
+        triplets = [(a, b, c(a, b)) for (a, b) in candidates_for_a_b]
+        return triplets
+    else:
+        return None
+
+
+def q009(triplet_sum: int) -> Optional[int]:
+    triplets = find_triplet(triplet_sum)
+    if triplets and len(triplets) == 1:
+        (a, b, c) = triplets[0]
+        return a * b * c
+    else:
+        return None

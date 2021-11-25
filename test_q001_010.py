@@ -1,4 +1,4 @@
-from q001_010 import q001, q002, q003, q004, q005, q006, q007, q008, Q008_constant
+from q001_010 import q001, q002, q003, q004, q005, q006, q007, q008, Q008_constant, q009
 from test_util import all_primes_below
 
 
@@ -81,3 +81,12 @@ def test_q008():
     assert q008(test_string, 4) == 6561
     # expect not to omit the center '0'
     assert q008(test_string, 5) == 0
+
+
+def test_q009():
+    assert q009(12) == 3 * 4 * 5
+    assert q009(30) == 5 * 12 * 13
+    assert q009(40) == 8 * 15 * 17
+    assert q009(476) == 84 * 187 * 205
+    assert q009(992) == 31 * 480 * 481
+    assert q009(1000) == 8 * 15 * 17 * (25 ** 3)
