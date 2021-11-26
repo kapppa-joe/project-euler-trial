@@ -1,5 +1,5 @@
 from typing import Optional, Tuple
-from util import fib_generator, is_palindromic_num, is_prime, lcm, nth_prime, product, str_to_digits
+from util import all_primes_below, fib_generator, is_palindromic_num, is_prime, lcm, nth_prime, product, str_to_digits
 
 
 def q001(a: int, b: int, limit: int) -> int:
@@ -129,3 +129,9 @@ def q009(triplet_sum: int) -> Optional[int]:
         return a * b * c
     else:
         return None
+
+
+def q010(limit: int) -> int:
+    # The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+    # Find the sum of all the primes below two million.
+    return sum(all_primes_below(limit))
