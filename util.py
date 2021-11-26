@@ -34,14 +34,20 @@ def fib_generator(limit: int) -> int:
 
 def all_primes_below(n: int, asc: bool = True) -> int:
     # generate all prime numbers lower than n
-    # uses the old and simple SOE
-    isPrime = [True for i in range(n)]
+    # use the old and simple SOE
+    isPrime = [True for _ in range(n)]
+
     p = 2
+    for m in range(p * 2, n, p):
+        isPrime[m] = False
+
+    p = 3
     while (p * p < n):
         if isPrime[p]:
             for m in range(p * 2, n, p):
                 isPrime[m] = False
-        p += 1
+        p += 2
+
     if asc:
         return (i for i in range(2, n) if isPrime[i])
     else:
