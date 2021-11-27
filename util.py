@@ -1,5 +1,5 @@
 import functools
-from typing import Iterable
+from typing import Generator, Iterable, Optional
 
 
 def is_even(n: int) -> bool:
@@ -23,7 +23,7 @@ def nth_fib(n: int) -> int:
     return fib(n)
 
 
-def fib_generator(limit: int) -> int:
+def fib_generator(limit: int) -> Iterable[int]:
     # generate a fib number seq lower than n
     a = 1
     b = 1
@@ -32,7 +32,7 @@ def fib_generator(limit: int) -> int:
         yield a
 
 
-def all_primes_below(n: int, asc: bool = True) -> int:
+def all_primes_below(n: int, asc: bool = True) -> Iterable[int]:
     # generate all prime numbers lower than n
     # use the old and simple SOE
     isPrime = [True for _ in range(n)]
@@ -68,7 +68,7 @@ def is_prime(num: int) -> bool:
     return True
 
 
-def prime_generator(limit: int) -> int:
+def prime_generator(limit: int) -> Generator[int, None, None]:
     # generate all prime numbers below the limit
     yield 2
     i = 3
@@ -78,7 +78,7 @@ def prime_generator(limit: int) -> int:
         i += 2
 
 
-def nth_prime(n: int) -> int:
+def nth_prime(n: int) -> Optional[int]:
     if n < 1:
         return None
     elif n == 1:
@@ -113,7 +113,7 @@ def gcd(a: int, b: int) -> int:
 
 def lcm(a: int, b: int) -> int:
     # compute the least common factor of two ints
-    return a * b / gcd(a, b)
+    return int(a * b / gcd(a, b))
 
 
 def product(iter: Iterable[int]) -> int:
