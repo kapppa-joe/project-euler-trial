@@ -1,4 +1,4 @@
-from util import nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits
+from util import all_divisors, nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator
 
 
 def test_nth_fib():
@@ -81,3 +81,20 @@ def test_product():
 def test_str_to_digits():
     assert list(str_to_digits("1")) == [1]
     assert list(str_to_digits("12345")) == [1, 2, 3, 4, 5]
+
+
+def test_triangle_number_generator():
+    t_gen = triangle_number_generator()
+    for k in [1, 3, 6, 10, 15, 21, 28, 36, 45, 55]:
+        assert next(t_gen) == k
+
+
+def test_all_divisors():
+    assert all_divisors(1) == [1]
+    assert all_divisors(2) == [1, 2]
+    assert all_divisors(3) == [1, 3]
+    assert all_divisors(4) == [1, 2, 4]
+    assert all_divisors(6) == [1, 2, 3, 6]
+    assert all_divisors(8) == [1, 2, 4, 8]
+    assert all_divisors(36) == [1, 2, 3, 4, 6, 9, 12, 18, 36]
+    assert all_divisors(60) == [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60]

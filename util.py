@@ -1,4 +1,5 @@
 import functools
+import math
 from typing import Generator, Iterable, Optional
 
 
@@ -124,3 +125,21 @@ def product(iter: Iterable[int]) -> int:
 def str_to_digits(string: str) -> Iterable[int]:
     # take a numeric string and convert to an Iterable of each digit
     return (int(char) for char in string)
+
+
+def triangle_number_generator() -> Iterable[int]:
+    # return a generator for triangle numbers
+    t = 1
+    k = 1
+    while True:
+        yield t
+        k += 1
+        t += k
+
+
+def all_divisors(n: int) -> list[int]:
+    sqrt = math.ceil(n ** 0.5)
+    first_half = [i for i in range(1, sqrt + 1) if n % i == 0]
+    second_half = [n // i for i in first_half[::-1]
+                   if n // i not in first_half]
+    return first_half + second_half

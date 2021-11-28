@@ -1,6 +1,6 @@
 import re
-from typing import Iterable
-from util import product
+from typing import Iterable, Optional
+from util import all_divisors, product, triangle_number_generator
 
 Q011_grid_raw = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
@@ -66,3 +66,10 @@ def q011(input_grid: str, n: int) -> int:
                for x0 in range(width)
                for y0 in range(height)
                for adj_nums in all_four_directions(x0, y0))
+
+
+def q012(number_of_divisors: int) -> Optional[int]:
+    # What is the value of the first triangle number to have over five hundred divisors?
+    for t in triangle_number_generator():
+        if len(all_divisors(t)) > number_of_divisors:
+            return t

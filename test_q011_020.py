@@ -1,4 +1,4 @@
-from q011_020 import q011, Q011_grid_raw
+from q011_020 import q011, Q011_grid_raw, q012
 
 
 test_grid = """3 3 0 1 1
@@ -18,3 +18,13 @@ def test_q011():
     assert q011(test_grid, 3) == 3 * 10 * 2
     assert q011(test_grid, 4) == 2 * 1 * 2 * 5
     assert q011(test_grid, 5) == 4 * 2 * 1 * 2 * 5
+
+
+def test_q012():
+    assert q012(1) == 3
+    assert q012(2) == 6
+    assert q012(3) == 6
+    assert q012(4) == 28
+    assert q012(5) == 28
+    assert q012(6) == 36
+    assert q012(500) == 76576500
