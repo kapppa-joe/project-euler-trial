@@ -30,9 +30,18 @@ def test_big_num():
 
 
 def test_big_num_handle_invalid_input():
-    with pytest.raises(ValueError) as e_info:
-        n = BigNum('1.234')
-    assert 'cannot interpret input string' in str(e_info.value)
+    test_inputs = [
+        '1.234',
+        '',
+        'foo bar'
+        'Hello world',
+        '$12345',
+        'lEE7'
+    ]
+    for input in test_inputs:
+        with pytest.raises(ValueError) as e_info:
+            n = BigNum(input)
+        assert 'cannot interpret input string' in str(e_info.value)
 
 
 def test_big_num_addition():
@@ -50,8 +59,6 @@ def test_big_num_addition():
     n3 = BigNum('8476739468001') + BigNum('1009')
     assert isinstance(n3, BigNum)
     assert str(n3) == str(8476739468001 + 1009)
-
-    n4 = BigNum('9930341272') + BigNum('92010316')
 
     # random test
     for _ in range(1000):
