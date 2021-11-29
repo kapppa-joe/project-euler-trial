@@ -1,4 +1,4 @@
-from q011_020 import q011, Q011_grid_raw, q012
+from q011_020 import q011, Q011_grid_raw, q012, Q013_input_string, q013
 
 
 test_grid = """3 3 0 1 1
@@ -28,3 +28,7 @@ def test_q012():
     assert q012(5) == 28
     assert q012(6) == 36
     assert q012(500) == 76576500
+
+
+def test_q013():
+    assert q013(Q013_input_string, 10) == '5537376230'
