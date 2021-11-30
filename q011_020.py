@@ -1,7 +1,7 @@
 import functools
 from typing import Iterable, Optional
 from big_num import BigNum
-from util import all_divisors, product, triangle_number_generator
+from util import all_divisors, is_even, product, triangle_number_generator
 
 Q011_grid_raw = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
@@ -183,3 +183,32 @@ def q013(input_str: str, digits: int) -> str:
     big_nums = (BigNum(num_string) for num_string in input_str.split('\n'))
     total_sum = functools.reduce(lambda acc, i: acc + i, big_nums)
     return str(total_sum)[:digits]
+
+
+def collatz_next(n: int) -> int:
+    if is_even(n):
+        return n // 2
+    else:
+        return 3 * n + 1
+
+
+@functools.cache
+def collatz_chain(starting_num: int) -> int:
+    if starting_num < 1:
+        return 0
+    elif starting_num == 1:
+        return 1
+    else:
+        return 1 + collatz_chain(collatz_next(starting_num))
+
+
+def q014(upper_limit: int) -> int:
+    # Which starting number, under one million, produces the longest Collatz sequence chain?
+    candidate = 0
+    longest_chain = 0
+    for i in range(1, upper_limit):
+        chain_length = collatz_chain(i)
+        if chain_length > longest_chain:
+            candidate = i
+            longest_chain = chain_length
+    return candidate
