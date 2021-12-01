@@ -212,3 +212,17 @@ def q014(upper_limit: int) -> int:
             candidate = i
             longest_chain = chain_length
     return candidate
+
+
+def q015(width: int, height: int) -> int:
+    # Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner.
+    # How many such routes are there through a 20×20 grid?
+    return q015_recur(width, height)
+
+
+@functools.cache
+def q015_recur(width: int, height: int) -> int:
+    if width == 0 or height == 0:
+        return 1
+    else:
+        return q015_recur(width - 1, height) + q015_recur(width, height - 1)
