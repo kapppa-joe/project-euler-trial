@@ -15,20 +15,20 @@ class BigNum:
             number_string = number_string[1:]
         if not number_string.isdigit():
             raise ValueError('cannot interpret input string')
-        self.start = Node(number_string)
+        self.head = Node(number_string)
 
     def __str__(self):
         sign = '-' if self.isNegative else ''
-        return sign + str(self.start)
+        return sign + str(self.head)
 
     def __repr__(self):
         return f'BigNum(\'{str(self)}\')'
 
     def __len__(self):
-        return self.start.len()
+        return self.head.len()
 
     def __eq__(self, other: BigNum) -> bool:
-        return self.start.equal_to(other.start) and self.isNegative == other.isNegative
+        return self.head.equal_to(other.head) and self.isNegative == other.isNegative
 
     def __add__(self, other: BigNum) -> BigNum:
         if self.isNegative != other.isNegative:
@@ -48,7 +48,7 @@ class BigNum:
 
     def add(self, other: BigNum) -> BigNum:
         clone = self.clone()
-        clone.start.add(other.start)
+        clone.head.add(other.head)
         return clone
 
     def subtract(self, other: BigNum) -> BigNum:
@@ -59,11 +59,11 @@ class BigNum:
             return clone
 
         clone = self.clone()
-        flip_sign = clone.start.subtract(other.start)
+        flip_sign = clone.head.subtract(other.head)
         if flip_sign:
             clone.isNegative = not clone.isNegative
 
-        clone.start.handle_trailing_zeros()
+        clone.head.handle_trailing_zeros()
         return clone
 
     def negation(self) -> BigNum:
@@ -76,14 +76,14 @@ class BigNum:
             raise ValueError("negative shift count")
         elif self.isNegative:
             raise ValueError("can't shift negative number")
-        elif self.start.digit == 0 and not self.start.next:
+        elif self.head.digit == 0 and not self.head.next:
             return self.clone()
 
         clone = self.clone()
         while i != 0:
             new_head = Node('0')
-            new_head.next = clone.start
-            clone.start = new_head
+            new_head.next = clone.head
+            clone.head = new_head
             i -= 1
         return clone
 
@@ -93,11 +93,11 @@ class BigNum:
 
         result = BigNum('0')
 
-        pointer = other.start
+        pointer = other.head
         while pointer:
             if pointer.digit != 0:
                 partial_result = base.clone()
-                partial_result.start.multiply_single_digit(pointer)
+                partial_result.head.multiply_single_digit(pointer)
                 result += partial_result
             pointer = pointer.next
             base = base.shift_left(1)
