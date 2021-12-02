@@ -44,6 +44,26 @@ def test_big_num_handle_invalid_input():
         assert 'cannot interpret input string' in str(e_info.value)
 
 
+def test_big_num_equal():
+    n1 = BigNum('12345')
+    n2 = BigNum('12345')
+    assert n1 == n2
+
+    n3 = BigNum('0012345')
+    assert n1 == n3
+    assert n3 == n1
+
+    # random test
+    for _ in range(1000):
+        n0 = random.randint(1, 10 ** 10)
+        n1 = n0
+        if random.random() > 0.3:
+            n1 += random.randint(-10, 10)
+        bignum0 = BigNum(str(n0))
+        bignum1 = BigNum(str(n1))
+        assert (bignum0 == bignum1) == (n0 == n1)
+
+
 def test_big_num_addition():
     n0 = BigNum('12345')
     n1 = BigNum('298765')
@@ -117,21 +137,33 @@ def test_big_num_negative():
         assert str(BigNum(str(n1)) + BigNum(str(n2))) == str(sum)
 
 
-def test_big_num_equal():
-    n1 = BigNum('12345')
-    n2 = BigNum('12345')
-    assert n1 == n2
-
-    n3 = BigNum('0012345')
-    assert n1 == n3
-    assert n3 == n1
+def test_big_num_shift_left():
+    assert BigNum('1').shift_left(1) == BigNum('10')
+    assert BigNum('2').shift_left(2) == BigNum('200')
+    assert BigNum('357').shift_left(3) == BigNum('357000')
 
     # random test
     for _ in range(1000):
-        n0 = random.randint(1, 10 ** 10)
-        n1 = n0
-        if random.random() > 0.3:
-            n1 += random.randint(-10, 10)
-        bignum0 = BigNum(str(n0))
-        bignum1 = BigNum(str(n1))
-        assert (bignum0 == bignum1) == (n0 == n1)
+        n1 = random.randint(0, 10 ** 10)
+        n2 = random.randint(0, 10)
+        assert BigNum(str(n1)).shift_left(n2) == BigNum(str(n1 * 10 ** n2))
+
+
+def test_big_num_multiplication():
+    assert BigNum('1') * BigNum('2') == BigNum('2')
+    assert BigNum('2') * BigNum('5') == BigNum('10')
+    assert BigNum('7') * BigNum('3') == BigNum('21')
+    assert BigNum('5') * BigNum('5') == BigNum('25')
+    assert BigNum('20') * BigNum('5') == BigNum('100')
+    assert BigNum('1234') * BigNum('10') == BigNum('12340')
+    assert BigNum('20') * BigNum('2468') == BigNum('49360')
+    assert BigNum('1234') * BigNum('5678') == BigNum('7006652')
+    assert BigNum('54321') * BigNum('0') == BigNum('0')
+    assert BigNum('-135') * BigNum('246') == BigNum('-33210')
+    assert BigNum('-100') * BigNum('-100') == BigNum('10000')
+
+    for _ in range(1000):
+        n1 = random.randint(-10 ** 10, 10 ** 10)
+        n2 = random.randint(-10 ** 10, 10 ** 10)
+        product = n1 * n2
+        assert BigNum(str(n1)) * BigNum(str(n2)) == BigNum(str(product))

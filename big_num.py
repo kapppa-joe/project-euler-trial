@@ -22,10 +22,13 @@ class BigNum:
         return sign + str(self.start)
 
     def __repr__(self):
-        return f'BigNum<{str(self)}>'
+        return f'BigNum(\'{str(self)}\')'
 
     def __len__(self):
         return self.start.len()
+
+    def __eq__(self, other: BigNum) -> bool:
+        return self.start.equal_to(other.start) and self.isNegative == other.isNegative
 
     def __add__(self, other: BigNum) -> BigNum:
         if self.isNegative != other.isNegative:
@@ -37,8 +40,8 @@ class BigNum:
             return self + other.negation()
         return self.subtract(other)
 
-    def __eq__(self, other: BigNum) -> bool:
-        return self.start.equal_to(other.start) and self.isNegative == other.isNegative
+    def __mul__(self, other: BigNum) -> BigNum:
+        return self.multiply(other)
 
     def clone(self):
         return BigNum(str(self))
@@ -68,6 +71,40 @@ class BigNum:
         clone.isNegative = not self.isNegative
         return clone
 
+    def shift_left(self, i) -> BigNum:
+        if i < 0:
+            raise ValueError("negative shift count")
+        elif self.isNegative:
+            raise ValueError("can't shift negative number")
+        elif self.start.digit == 0 and not self.start.next:
+            return self.clone()
+
+        clone = self.clone()
+        while i != 0:
+            new_head = Node('0')
+            new_head.next = clone.start
+            clone.start = new_head
+            i -= 1
+        return clone
+
+    def multiply(self, other: BigNum) -> BigNum:
+        base = self.clone()
+        base.isNegative = False
+
+        result = BigNum('0')
+
+        pointer = other.start
+        while pointer:
+            if pointer.digit != 0:
+                partial_result = base.clone()
+                partial_result.start.multiply_single_digit(pointer)
+                result += partial_result
+            pointer = pointer.next
+            base = base.shift_left(1)
+
+        result.isNegative = self.isNegative ^ other.isNegative
+        return result
+
 
 class Node:
     def __init__(self, number_string: str):
@@ -87,6 +124,19 @@ class Node:
             return 1
         else:
             return 1 + self.next.len()
+
+    def equal_to(self, other: Node) -> bool:
+        """
+        for implement __eq__
+        """
+        if self.digit != other.digit:
+            return False
+        if bool(self.next) != bool(other.next):
+            return False
+        if self.next:
+            return self.next.equal_to(cast(Node, other.next))
+        else:
+            return True
 
     def add(self, other: Node):
         """
@@ -175,15 +225,8 @@ class Node:
         self.digit = 10 - self.digit
         next.handle_borrow()
 
-    def equal_to(self, other: Node) -> bool:
-        """
-        for implement __eq__
-        """
-        if self.digit != other.digit:
-            return False
-        if bool(self.next) != bool(other.next):
-            return False
+    def multiply_single_digit(self, other: Node):
+        self.digit *= other.digit
         if self.next:
-            return self.next.equal_to(cast(Node, other.next))
-        else:
-            return True
+            self.next.multiply_single_digit(other)
+        self.handle_carry_over()
