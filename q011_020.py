@@ -226,3 +226,26 @@ def q015_recur(width: int, height: int) -> int:
         return 1
     else:
         return q015_recur(width - 1, height) + q015_recur(width, height - 1)
+
+
+def q016(power: int) -> int:
+    if power == 0:
+        return 1
+
+    acc = BigNum('2')
+    k = BigNum('1')
+    while power > 1:
+        if is_even(power):
+            acc = acc * acc
+            power = power // 2
+        else:
+            k *= acc
+            power = power - 1
+    acc *= k
+
+    sum_of_digits = 0
+    pointer = acc.head
+    while pointer:
+        sum_of_digits += pointer.digit
+        pointer = pointer.next
+    return sum_of_digits
