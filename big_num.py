@@ -59,6 +59,8 @@ class BigNum:
         flip_sign = clone.start.subtract(other.start)
         if flip_sign:
             clone.isNegative = not clone.isNegative
+
+        clone.start.handle_trailing_zeros()
         return clone
 
     def negation(self) -> BigNum:
@@ -127,14 +129,14 @@ class Node:
         self.digit -= other.digit
         self_flip_sign = self.digit < 0
 
-        if self.next and next_flip_sign != self_flip_sign:
+        if self.next and not next_flip_sign and self_flip_sign:
             self.handle_borrow()
+        if self.next and next_flip_sign and not self_flip_sign:
+            self.handle_lend()
 
         if self.digit < 0:
             flip_side = True
             self.digit = abs(self.digit)
-
-        self.handle_trailing_zeros()
 
         return flip_side or next_flip_sign
 
@@ -145,18 +147,33 @@ class Node:
         if self.next.digit == 0 and not self.next.next:
             self.next = None
 
+    def can_be_borrowed(self):
+        if self.digit >= 1:
+            return True
+        else:
+            return self.next and self.next.can_be_borrowed()
+
     def handle_borrow(self):
         """
         handle borrow
         """
         if self.digit >= 0:
             return
+        if not self.next or not self.next.can_be_borrowed():
+            return
         borrow = self.digit // 10
         self.digit = self.digit % 10
         next = cast(Node, self.next)
         next.digit += borrow
         next.handle_borrow()
-        self.handle_trailing_zeros()
+
+    def handle_lend(self):
+        if self.digit == 0:
+            return
+        next = cast(Node, self.next)
+        next.digit -= 1
+        self.digit = 10 - self.digit
+        next.handle_borrow()
 
     def equal_to(self, other: Node) -> bool:
         """

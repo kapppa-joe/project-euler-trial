@@ -81,23 +81,22 @@ def test_big_num_subtraction():
     assert BigNum('13') - BigNum('2') == BigNum('11')
     assert BigNum('10') - BigNum('8') == BigNum('2')
     assert BigNum('101') - BigNum('8') == BigNum('93')
+    assert BigNum('11') - BigNum('18') == BigNum('-7')
     assert BigNum('1') - BigNum('2') == BigNum('-1')
     assert BigNum('1') - BigNum('9') == BigNum('-8')
     assert BigNum('2') - BigNum('11') == BigNum('-9')
-    print(BigNum('39') - BigNum('40'), "<---")
     assert BigNum('39') - BigNum('40') == BigNum('-1')
     assert BigNum('801') - BigNum('999') == BigNum('-198')
     assert BigNum('81231') - BigNum('99999') == BigNum('-18768')
-    print(BigNum('3939798913') - BigNum('4029798884'), "<---")
     assert BigNum('3939798913') - BigNum('4029798884') == BigNum('-89999971')
+    assert BigNum('3984881897') - BigNum('6989343450') == BigNum('-3004461553')
 
-  # random test
-    # for _ in range(1000):
-    #     n1 = random.randint(1, 10 ** 10)
-    #     n2 = random.randint(1, 10 ** 10)
-    #     diff = n1 - n2
-    #     print(n1, n2, "<-- n1, n2")
-    #     assert str(BigNum(str(n1)) - BigNum(str(n2))) == str(diff)
+    # random test
+    for _ in range(1000):
+        n1 = random.randint(1, 10 ** 10)
+        n2 = random.randint(1, 10 ** 10)
+        diff = n1 - n2
+        assert str(BigNum(str(n1)) - BigNum(str(n2))) == str(diff)
 
 
 def test_big_num_negative():
@@ -109,6 +108,13 @@ def test_big_num_negative():
 
     assert BigNum('1000') + BigNum('-50') == BigNum('950')
     assert BigNum('100') + BigNum('-1001') == BigNum('-901')
+
+    # random test
+    for _ in range(1000):
+        n1 = random.randint(-10 ** 10, 10 ** 10)
+        n2 = random.randint(-10 ** 10, 10 ** 10)
+        sum = n1 + n2
+        assert str(BigNum(str(n1)) + BigNum(str(n2))) == str(sum)
 
 
 def test_big_num_equal():
