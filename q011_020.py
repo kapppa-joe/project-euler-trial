@@ -1,6 +1,7 @@
 import functools
 from typing import Iterable, Optional
 from big_num import BigNum
+from number_in_words import count_letters, number_in_words
 from util import all_divisors, is_even, product, triangle_number_generator
 
 Q011_grid_raw = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
@@ -229,6 +230,9 @@ def q015_recur(width: int, height: int) -> int:
 
 
 def q016(power: int) -> int:
+    # 215 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+    # What is the sum of the digits of the number 2^1000?
+
     if power == 0:
         return 1
 
@@ -249,3 +253,12 @@ def q016(power: int) -> int:
         sum_of_digits += pointer.digit
         pointer = pointer.next
     return sum_of_digits
+
+
+def q017(upper_limit: int) -> int:
+    # If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+    # If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?
+    def f(number):
+        return count_letters(number_in_words(number))
+
+    return sum(f(i) for i in range(1, upper_limit + 1))

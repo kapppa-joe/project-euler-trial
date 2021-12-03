@@ -1,4 +1,4 @@
-from q011_020 import collatz_next, collatz_chain, q011, Q011_grid_raw, q012, Q013_input_string, q013, q014, q015, q016
+from q011_020 import collatz_next, collatz_chain, q011, Q011_grid_raw, q012, Q013_input_string, q013, q014, q015, q016, q017
 
 
 test_grid = """3 3 0 1 1
@@ -108,3 +108,13 @@ def test_q016():
     assert q016(6) == 6 + 4
     assert q016(15) == 26
     assert q016(1000) == 1366
+
+
+def test_q017():
+    assert q017(1) == len('one')
+    assert q017(2) == len('one') + len('two')
+    assert q017(3) == len('one') + len('two') + len('three')
+    assert q017(4) == len('one') + len('two') + len('three') + len('four')
+    assert q017(5) == len('one') + len('two') + \
+        len('three') + len('four') + len('five')
+    assert q017(1000) == 21124
