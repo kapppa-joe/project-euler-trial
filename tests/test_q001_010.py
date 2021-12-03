@@ -1,5 +1,5 @@
 from q001_010 import q001, q002, q003, q004, q005, q006, q007, q008, Q008_constant, q009, q010
-from test_util import all_primes_below
+from tests.test_util import all_primes_below
 
 
 def test_q001():
