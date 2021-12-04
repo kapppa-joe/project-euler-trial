@@ -3,7 +3,9 @@ from typing import Iterable, Optional
 from big_num import BigNum
 from constant_inputs.q011_input import Q011_grid_raw
 from constant_inputs.q013_input import Q013_input_string
+from constant_inputs.q018_input import Q018_triangle_raw_input
 from number_in_words import count_letters, number_in_words
+from number_triangle import NumberTriangle
 from util import all_divisors, is_even, product, triangle_number_generator
 
 
@@ -141,3 +143,10 @@ def q017(upper_limit: int) -> int:
         return count_letters(number_in_words(number))
 
     return sum(f(i) for i in range(1, upper_limit + 1))
+
+
+def q018(triangle_str: str = Q018_triangle_raw_input) -> int:
+    # By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
+    # Find the maximum total from top to bottom of the triangle below:
+    triangle = NumberTriangle(triangle_str)
+    return triangle.max_value(0, 0)
