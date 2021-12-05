@@ -1,4 +1,4 @@
-from q011_020 import collatz_next, collatz_chain, q011, Q011_grid_raw, q012, Q013_input_string, q013, q014, q015, q016, q017, q018, Q018_triangle_raw_input
+from q011_020 import collatz_next, collatz_chain, q011, Q011_grid_raw, q012, Q013_input_string, q013, q014, q015, q016, q017, q018, Q018_triangle_raw_input, q019
 
 
 test_grid = """3 3 0 1 1
@@ -124,3 +124,7 @@ def test_q018():
     test_triangle = "3\n7 4\n2 4 6\n8 5 9 3"
     assert q018(test_triangle) == 23
     assert q018(Q018_triangle_raw_input) == 1074
+
+
+def test_q019():
+    assert q019() == 171

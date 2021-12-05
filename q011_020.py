@@ -1,6 +1,7 @@
 import functools
 from typing import Iterable, Optional
 from big_num import BigNum
+from calendar_date import CalendarDate
 from constant_inputs.q011_input import Q011_grid_raw
 from constant_inputs.q013_input import Q013_input_string
 from constant_inputs.q018_input import Q018_triangle_raw_input
@@ -150,3 +151,17 @@ def q018(triangle_str: str = Q018_triangle_raw_input) -> int:
     # Find the maximum total from top to bottom of the triangle below:
     triangle = NumberTriangle(triangle_str)
     return triangle.max_value(0, 0)
+
+
+def q019() -> int:
+    # How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+    dates_to_check = ((1, month, year)
+                      for month in range(1, 12 + 1)
+                      for year in range(1901, 2000 + 1))
+
+    count_sundays = 0
+    for (day, month, year) in dates_to_check:
+        if CalendarDate(day, month, year).day_of_week() == 0:
+            count_sundays += 1
+
+    return count_sundays
