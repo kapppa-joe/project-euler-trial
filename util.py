@@ -129,7 +129,7 @@ def str_to_digits(string: str) -> Iterable[int]:
     return (int(char) for char in string)
 
 
-def triangle_number_generator() -> Iterable[int]:
+def triangle_number_generator() -> Generator[int, None, None]:
     # return a generator for triangle numbers
     t = 1
     k = 1
