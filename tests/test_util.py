@@ -1,4 +1,5 @@
-from util import all_divisors, nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator
+from big_num import BigNum
+from util import all_divisors, nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, factorial
 
 
 def test_nth_fib():
@@ -98,3 +99,11 @@ def test_all_divisors():
     assert all_divisors(8) == [1, 2, 4, 8]
     assert all_divisors(36) == [1, 2, 3, 4, 6, 9, 12, 18, 36]
     assert all_divisors(60) == [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60]
+
+
+def test_factorial():
+    assert factorial(BigNum('1')) == BigNum('1')
+    assert factorial(BigNum('2')) == BigNum('2')
+    assert factorial(BigNum('3')) == BigNum('6')
+    assert factorial(BigNum('4')) == BigNum('24')
+    assert factorial(BigNum('5')) == BigNum('120')

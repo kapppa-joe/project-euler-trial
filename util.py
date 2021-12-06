@@ -2,6 +2,8 @@ import functools
 import math
 from typing import Generator, Iterable, Optional
 
+from big_num import BigNum
+
 
 def is_even(n: int) -> bool:
     return n & 1 == 0
@@ -143,3 +145,10 @@ def all_divisors(n: int) -> list[int]:
     second_half = [n // i for i in first_half[::-1]
                    if n // i not in first_half]
     return first_half + second_half
+
+
+def factorial(n: BigNum) -> BigNum:
+    if n == BigNum('0'):
+        return BigNum('1')
+    else:
+        return n * factorial(n - BigNum('1'))
