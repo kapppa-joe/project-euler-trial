@@ -18,7 +18,9 @@ Some of the custom classes/functions I have implemented:
 
 - A function to produce all primes below n, using the Sieve of Eratosthenes algorithm
 
-- A custom BigNumber class implemented with singly linked lists, which supports addition / subtraction / multiplication / factorial for now
+- A custom BigNumber class implemented with singly linked lists, which supports addition / subtraction / multiplication / factorial
+
+- A quicksort function
 
 Test for each solution function and util function are included as well.
 

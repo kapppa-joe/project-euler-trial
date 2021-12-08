@@ -1,4 +1,5 @@
-from q021_030 import have_amicable_pair, q021, sum_of_divisors
+from constant_inputs.q022_names import Q022_names
+from q021_030 import have_amicable_pair, name_score, q021, q022, sum_of_divisors
 
 
 def test_sum_of_divisors():
@@ -26,3 +27,23 @@ def test_q021():
     assert q021(285) == 220 + 284
     assert q021(1211) == 220 + 284 + 1184 + 1210
     assert q021(10000) == 31626
+
+
+def test_name_score():
+    assert name_score("COLIN", 0) == 53
+    assert name_score("cOliN", 0) == 53
+    assert name_score("COLIN", 1) == 53 * 2
+    assert name_score("COLIN", 937) == 49714
+
+
+def test_q022():
+    names = ["COLIN", "ANNA"]
+    assert q022(names) == 30 + 53 * 2  # ANNA is 30, COLINA is 53
+
+    names = ["COLIN", "DAVID"]
+    assert q022(names) == 53 + 40 * 2  # DAVID is 40
+
+    names = ["DAVID", "COLIN", "ANNA"]
+    assert q022(names) == 30 + 53 * 2 + 40 * 3
+
+    assert q022(names=Q022_names) == 871198282
