@@ -152,3 +152,14 @@ def factorial(n: BigNum) -> BigNum:
         return BigNum('1')
     else:
         return n * factorial(n - BigNum('1'))
+
+
+def is_sum_of_two_elements(n: int, num_list: list[int]) -> bool:
+    # input number n and a sorted list
+    # traverse all nums below n / 2 and check if it can be written as sum of two elements
+    for a in num_list:
+        if (n - a) in num_list:
+            return True
+        elif 2 * a > n:
+            return False
+    return False

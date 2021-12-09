@@ -1,4 +1,6 @@
 import functools
+import itertools
+from typing import Generator
 from constant_inputs.q022_names import Q022_names
 from sort import quicksort
 from util import all_divisors
@@ -31,3 +33,48 @@ def q022(names: list[str] = Q022_names) -> int:
     sorted_names = quicksort(names)
 
     return sum(name_score(name, i) for (i, name) in enumerate(sorted_names))
+
+
+def is_abundant_number(n: int) -> bool:
+    proper_divisors = (d for d in all_divisors(n) if d != n)
+    return sum(proper_divisors) > n
+
+
+def gen_abundant_number(limit: int) -> Generator[int, None, None]:
+    i = 12
+    while i < limit:
+        if is_abundant_number(i):
+            yield i
+        i += 1
+
+
+def is_sum_of_two_elements(n: int, num_list: list[int]) -> bool:
+    # input number n and a sorted list
+    # traverse all nums below n / 2 and check if it can be written as sum of two elements
+    for a in num_list:
+        if (n - a) in num_list:
+            return True
+        elif 2 * a > n:
+            return False
+    return False
+
+
+def q023(limit: int = 28123) -> int:
+    """
+    Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
+    ( it is given that the greatest number that cannot be expressed as the sum of two abundant numbers is less than 28123. )
+    """
+
+    is_sum_of_two_abundant_nums = [False for i in range(limit)]
+    abundant_nums = list(itertools.takewhile(
+        lambda x: x < limit, gen_abundant_number(limit)))
+
+    # traverse all abundant nums a, b and mark a + b as True
+    for i in range(len(abundant_nums)):
+        if abundant_nums[i] * 2 > limit:
+            break  # return early when the smaller num is over half of upper limit
+        for j in range(i, len(abundant_nums)):
+            a, b = abundant_nums[i], abundant_nums[j]
+            if a + b < limit:
+                is_sum_of_two_abundant_nums[a + b] = True
+    return sum(i for i in range(limit) if not is_sum_of_two_abundant_nums[i])

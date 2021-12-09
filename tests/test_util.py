@@ -1,5 +1,5 @@
 from big_num import BigNum
-from util import all_divisors, nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, factorial
+from util import all_divisors, nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, factorial, is_sum_of_two_elements
 
 
 def test_nth_fib():
@@ -107,3 +107,12 @@ def test_factorial():
     assert factorial(BigNum('3')) == BigNum('6')
     assert factorial(BigNum('4')) == BigNum('24')
     assert factorial(BigNum('5')) == BigNum('120')
+
+
+def test_is_sum_of_two_elements():
+    num_list = [1, 3, 5, 7, 9]
+    assert is_sum_of_two_elements(1, num_list) == False
+    assert is_sum_of_two_elements(2, num_list) == True
+    assert is_sum_of_two_elements(4, num_list) == True
+    assert is_sum_of_two_elements(5, num_list) == False
+    assert is_sum_of_two_elements(6, num_list) == True

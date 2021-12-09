@@ -1,5 +1,5 @@
 from constant_inputs.q022_names import Q022_names
-from q021_030 import have_amicable_pair, name_score, q021, q022, sum_of_divisors
+from q021_030 import gen_abundant_number, have_amicable_pair, is_abundant_number, is_sum_of_two_elements, name_score, q021, q022, q023, sum_of_divisors
 
 
 def test_sum_of_divisors():
@@ -47,3 +47,29 @@ def test_q022():
     assert q022(names) == 30 + 53 * 2 + 40 * 3
 
     assert q022(names=Q022_names) == 871198282
+
+
+def test_is_abundant_number():
+    for i in range(12):
+        assert is_abundant_number(i) == False
+    assert is_abundant_number(12) == True
+    assert is_abundant_number(17) == False
+    assert is_abundant_number(18) == True
+    assert is_abundant_number(20) == True
+    assert is_abundant_number(24) == True
+    assert is_abundant_number(36) == True
+
+
+def test_gen_abundant_number():
+    abundant_numbers_under_100 = list(gen_abundant_number(100))
+    assert abundant_numbers_under_100 == [
+        12, 18, 20, 24, 30, 36, 40, 42, 48, 54, 56, 60, 66, 70, 72, 78, 80, 84, 88, 90, 96]
+
+
+def test_q023():
+    assert q023(24) == sum(i for i in range(24))
+    assert q023(25) == sum(i for i in range(25)) - 24
+    assert q023(31) == sum(i for i in range(31)) - 24 - 30
+    assert q023(60) == sum(i for i in range(60)) - 24 - 30 - 32 - \
+        36 - 38 - 40 - 42 - 44 - 48 - 50 - 52 - 54 - 56 - 58
+    assert q023() == 4179871
