@@ -1,4 +1,5 @@
 import functools
+import itertools
 import math
 from typing import Generator, Iterable, Optional
 
@@ -163,3 +164,8 @@ def is_sum_of_two_elements(n: int, num_list: list[int]) -> bool:
         elif 2 * a > n:
             return False
     return False
+
+
+def nth(iter: Iterable, n: int, default=None):
+    # return the nth elem of an iterable
+    return next(itertools.islice(iter, n, None), default)

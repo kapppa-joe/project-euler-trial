@@ -1,5 +1,5 @@
 from constant_inputs.q022_names import Q022_names
-from q021_030 import gen_abundant_number, have_amicable_pair, is_abundant_number, is_sum_of_two_elements, name_score, q021, q022, q023, sum_of_divisors
+from q021_030 import gen_abundant_number, have_amicable_pair, is_abundant_number, is_sum_of_two_elements, name_score, q021, q022, q023, q024, sum_of_divisors
 
 
 def test_sum_of_divisors():
@@ -73,3 +73,15 @@ def test_q023():
     assert q023(60) == sum(i for i in range(60)) - 24 - 30 - 32 - \
         36 - 38 - 40 - 42 - 44 - 48 - 50 - 52 - 54 - 56 - 58
     assert q023() == 4179871
+
+
+def test_q024():
+    assert q024([0, 1, 2], 0) == '012'
+    assert q024([0, 1, 2], 1) == '021'
+    assert q024([0, 1, 2], 5) == '210'
+    assert q024([0, 1, 2], 6) == ''  # only have 6 permutations
+    assert q024(list(range(4)), 0) == '0123'
+    assert q024(list(range(4)), 1) == '0132'
+    assert q024(list(range(4)), 10) == '1302'
+    # one millionth lexicographic permutation of 0..9:
+    assert q024(list(range(10)), 1_000_000 - 1) == '2783915460'

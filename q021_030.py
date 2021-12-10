@@ -1,9 +1,10 @@
 import functools
 import itertools
 from typing import Generator
+from combinatory import gen_permutation
 from constant_inputs.q022_names import Q022_names
 from sort import quicksort
-from util import all_divisors
+from util import all_divisors, nth
 
 
 @functools.cache
@@ -78,3 +79,13 @@ def q023(limit: int = 28123) -> int:
             if a + b < limit:
                 is_sum_of_two_abundant_nums[a + b] = True
     return sum(i for i in range(limit) if not is_sum_of_two_abundant_nums[i])
+
+
+def q024(input: list[int], n: int) -> str:
+    # What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
+    g = gen_permutation(input)
+    nth_permutation = nth(g, n)
+    if nth_permutation:
+        return ''.join(str(i) for i in nth_permutation)
+    else:
+        return ''
