@@ -98,7 +98,7 @@ def q025(digit_limit: int = 1000) -> int:
     index = 1
     fib = 1
 
-    # use start = 2 because this generator defines f0 and f1 to be 1
+    # set start = 2 because my generator starts with f1 = 1 and f2 = 2, while the question define f2 = 1 and f3 = 2
     fibs_with_index = enumerate(fib_generator(math.inf), start=2)
     while count_digits(fib) < digit_limit:
         (index, fib) = next(fibs_with_index)
