@@ -1,4 +1,4 @@
-from big_num import BigNum
+from big_num import BigNum, gen_fib
 import random
 import pytest
 
@@ -167,3 +167,16 @@ def test_big_num_multiplication():
         n2 = random.randint(-10 ** 10, 10 ** 10)
         product = n1 * n2
         assert BigNum(str(n1)) * BigNum(str(n2)) == BigNum(str(product))
+
+
+def test_big_num_gen_fib():
+    fibs = gen_fib()
+    assert next(fibs) == BigNum('1')
+    assert next(fibs) == BigNum('1')
+    assert next(fibs) == BigNum('2')
+    assert next(fibs) == BigNum('3')
+    assert next(fibs) == BigNum('5')
+    assert next(fibs) == BigNum('8')
+
+    for num in [13, 21, 34, 55, 89, 144]:
+        assert next(fibs) == BigNum(str(num))

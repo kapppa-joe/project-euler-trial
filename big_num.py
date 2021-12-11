@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import cast
+from typing import Generator, cast
 
 
 class BigNum:
@@ -230,3 +230,13 @@ class Node:
         if self.next:
             self.next.multiply_single_digit(other)
         self.handle_carry_over()
+
+
+def gen_fib() -> Generator[BigNum, None, None]:
+    # A generator of Fibonacci seq using the custom-made BigNum class
+    curr = BigNum('1')
+    next = BigNum('1')
+
+    while True:
+        yield curr
+        curr, next = next, curr + next
