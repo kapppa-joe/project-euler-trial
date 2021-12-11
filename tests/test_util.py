@@ -1,5 +1,6 @@
+import random
 from big_num import BigNum
-from util import all_divisors, nth, nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, factorial, is_sum_of_two_elements
+from util import all_divisors, count_digits, nth, nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, factorial, is_sum_of_two_elements
 
 
 def test_nth_fib():
@@ -124,3 +125,20 @@ def test_nth():
     assert nth([1, 2], 1) == 2
     assert nth([1, 2], 2) == None
     assert nth(range(100), 50) == 50
+
+
+def test_count_digits():
+    assert count_digits(-1) == 1
+    assert count_digits(0) == 1
+    assert count_digits(1) == 1
+    assert count_digits(9) == 1
+    assert count_digits(10) == 2
+    assert count_digits(17) == 2
+    assert count_digits(99) == 2
+    assert count_digits(100) == 3
+    assert count_digits(144) == 3
+
+    # random test
+    for _ in range(100):
+        n = random.randint(0, 10**100)
+        assert count_digits(n) == len(str(n))

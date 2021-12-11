@@ -27,7 +27,7 @@ def nth_fib(n: int) -> int:
     return fib(n)
 
 
-def fib_generator(limit: int) -> Iterable[int]:
+def fib_generator(limit: float) -> Iterable[int]:
     # generate a fib number seq lower than n
     a = 1
     b = 1
@@ -169,3 +169,12 @@ def is_sum_of_two_elements(n: int, num_list: list[int]) -> bool:
 def nth(iter: Iterable, n: int, default=None):
     # return the nth elem of an iterable
     return next(itertools.islice(iter, n, None), default)
+
+
+def count_digits(n: int) -> int:
+    # return the number of digits in an integer
+    count = 1
+    while n >= 10 or n <= -10:
+        n = n // 10
+        count += 1
+    return count

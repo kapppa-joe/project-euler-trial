@@ -1,10 +1,11 @@
 import functools
 import itertools
+import math
 from typing import Generator
 from combinatory import gen_permutation
 from constant_inputs.q022_names import Q022_names
 from sort import quicksort
-from util import all_divisors, nth
+from util import all_divisors, count_digits, fib_generator, nth
 
 
 @functools.cache
@@ -89,3 +90,17 @@ def q024(input: list[int], n: int) -> str:
         return ''.join(str(i) for i in nth_permutation)
     else:
         return ''
+
+
+def q025(digit_limit: int = 1000) -> int:
+    # What is the index of the first term in the Fibonacci sequence to contain 1000 digits?
+
+    index = 1
+    fib = 1
+
+    # use start = 2 because this generator defines f0 and f1 to be 1
+    fibs_with_index = enumerate(fib_generator(math.inf), start=2)
+    while count_digits(fib) < digit_limit:
+        (index, fib) = next(fibs_with_index)
+
+    return index
