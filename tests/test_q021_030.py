@@ -1,5 +1,5 @@
 from constant_inputs.q022_names import Q022_names
-from q021_030 import gen_abundant_number, have_amicable_pair, is_abundant_number, is_sum_of_two_elements, name_score, q021, q022, q023, q024, q025, sum_of_divisors
+from q021_030 import decimal_unit_fraction, gen_abundant_number, have_amicable_pair, is_abundant_number, name_score, q021, q022, q023, q024, q025, q026, recur_cycle_length, sum_of_divisors
 
 
 def test_sum_of_divisors():
@@ -100,3 +100,32 @@ def test_q025():
     assert q025(10) == 45
 
     assert q025(1000) == 4782
+
+
+def test_decimal_unit_fraction():
+    assert decimal_unit_fraction(2) == ('5', '')
+    assert decimal_unit_fraction(3) == ('3', '3')
+    assert decimal_unit_fraction(4) == ('25', '')
+    assert decimal_unit_fraction(5) == ('2', '')
+    assert decimal_unit_fraction(6) == ('16', '6')
+    assert decimal_unit_fraction(7) == ('142857', '142857')
+    assert decimal_unit_fraction(13) == ('076923', '076923')
+    assert decimal_unit_fraction(17) == (
+        '0588235294117647', '0588235294117647')
+
+
+def test_recur_cycle_length():
+    assert recur_cycle_length(2) == 0
+    assert recur_cycle_length(4) == 0
+    assert recur_cycle_length(3) == 1
+    assert recur_cycle_length(6) == 1
+    assert recur_cycle_length(7) == 6
+    assert recur_cycle_length(13) == 6
+    assert recur_cycle_length(17) == 16
+
+
+def test_q026():
+    assert q026(5) == 3
+    assert q026(10) == 7
+    assert q026(20) == 19
+    assert q026(1000) == 983

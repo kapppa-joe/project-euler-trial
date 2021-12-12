@@ -104,3 +104,39 @@ def q025(digit_limit: int = 1000) -> int:
         (index, fib) = next(fibs_with_index)
 
     return index
+
+
+def decimal_unit_fraction(deno: int) -> tuple[str, str]:
+    # compute the decimal representation of a unit fraction
+    # return the fraction part and recurring cycle part in tuple
+
+    if deno <= 1:
+        return ('', '')
+
+    fraction_part = []
+    numerators_seen = []
+    n = 10   # n: numerator
+
+    while n != 0 and n not in numerators_seen:
+        numerators_seen.append(n)
+        f = n // deno
+        fraction_part.append(f)
+        n = (n % deno) * 10
+    recur_part = []
+
+    if n != 0:
+        start_of_recur_part = numerators_seen.index(n)
+        recur_part = fraction_part[start_of_recur_part:]
+    return (''.join(str(i) for i in fraction_part), ''.join(str(i) for i in recur_part))
+
+
+@functools.cache
+def recur_cycle_length(deno: int):
+    # get the length of recur cycle part and memoize it
+    fraction_part, recur_part = decimal_unit_fraction(deno)
+    return len(recur_part)
+
+
+def q026(limit: int) -> int:
+    # Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
+    return max(range(2, limit), key=recur_cycle_length)
