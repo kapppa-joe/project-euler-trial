@@ -1,5 +1,5 @@
 from constant_inputs.q022_names import Q022_names
-from q021_030 import decimal_unit_fraction, gen_abundant_number, have_amicable_pair, is_abundant_number, name_score, q021, q022, q023, q024, q025, q026, recur_cycle_length, sum_of_divisors
+from q021_030 import count_consecutive_primes, decimal_unit_fraction, gen_abundant_number, have_amicable_pair, is_abundant_number, is_prime, name_score, q021, q022, q023, q024, q025, q026, q027, recur_cycle_length, sum_of_divisors
 
 
 def test_sum_of_divisors():
@@ -129,3 +129,31 @@ def test_q026():
     assert q026(10) == 7
     assert q026(20) == 19
     assert q026(1000) == 983
+
+
+def test_is_prime():
+    assert is_prime(1) == False
+    assert is_prime(2) == True
+    assert is_prime(3) == True
+    assert is_prime(4) == False
+    assert is_prime(5) == True
+    assert is_prime(101) == True
+    assert is_prime(999983) == True
+    assert is_prime(999987) == False
+    assert is_prime(1000003) == True
+    assert is_prime(1000033) == True
+    assert is_prime(1000007) == False
+
+
+def test_count_consecutive_primes():
+    assert count_consecutive_primes(a=1, b=-1) == 0
+    assert count_consecutive_primes(a=1, b=3) == 2
+    assert count_consecutive_primes(a=1, b=41) == 40
+    assert count_consecutive_primes(a=-79, b=1601) == 80
+
+
+def test_q027():
+    assert q027(1, 1) == 0
+    assert q027(2, 4) == -1 * 3
+    assert q027(2, 42) == -1 * 41
+    assert q027(1000, 1001) == -61 * 971
