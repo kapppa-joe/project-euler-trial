@@ -183,7 +183,10 @@ def q027(a_limit: int = 1000, b_limit: int = 1001) -> int:
             # screen out candidates with some simple tests:
             if not is_prime(1 + a + b):  # case of n == 1
                 continue
-            elif max_nums_of_prime_so_far > 1:  # case of n == best candidate so far
+            elif max_nums_of_prime_so_far > 1:
+                # case of n == largest consec primes so far.
+                # if this pair of a, b cannot make a prime with current highest n,
+                # than no need to check the cases of x = 1 .. n - 1.
                 n = max_nums_of_prime_so_far
                 if not is_prime(n ** 2 + a * n + b):
                     continue
@@ -197,4 +200,3 @@ def q027(a_limit: int = 1000, b_limit: int = 1001) -> int:
     print(
         f"best pair: {best_pair_so_far} produces {max_nums_of_prime_so_far} primes")
     return a * b
-# -61, 971 with 71 primes
