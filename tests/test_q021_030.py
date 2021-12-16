@@ -1,5 +1,5 @@
 from constant_inputs.q022_names import Q022_names
-from q021_030 import count_consecutive_primes, decimal_unit_fraction, gen_abundant_number, have_amicable_pair, is_abundant_number, is_prime, name_score, q021, q022, q023, q024, q025, q026, q027, q028, recur_cycle_length, sum_of_divisors
+from q021_030 import count_consecutive_primes, decimal_unit_fraction, gen_abundant_number, have_amicable_pair, is_abundant_number, is_prime, name_score, q021, q022, q023, q024, q025, q026, q027, q028, q029, recur_cycle_length, sum_of_divisors
 
 
 def test_sum_of_divisors():
@@ -165,3 +165,14 @@ def test_q028():
     assert q028(5) == 101
     assert q028(7) == 101 + 31 + 37 + 43 + 49
     assert q028(1001) == 669171001
+
+
+def test_q029():
+    assert q029(2, 2) == 1
+    assert q029(4, 4) == 8
+    assert q029(5, 5) == 15
+    assert q029(6, 6) == 23  # 2^4 == 4^2, 2^6 == 4^3, so it is 25 - 2
+    # 69 computed by len(set(a ** b for a in range(2, 11) for b in range(2, 11)))
+    assert q029(10, 10) == 69
+
+    assert q029(100, 100) == 9183
