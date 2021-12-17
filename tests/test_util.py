@@ -1,6 +1,6 @@
 import random
 from big_num import BigNum
-from util import all_divisors, count_digits, nth, nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, factorial, is_sum_of_two_elements
+from util import all_divisors, count_digits, int_to_digits, nth, nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, factorial, is_sum_of_two_elements
 
 
 def test_nth_fib():
@@ -83,6 +83,13 @@ def test_product():
 def test_str_to_digits():
     assert list(str_to_digits("1")) == [1]
     assert list(str_to_digits("12345")) == [1, 2, 3, 4, 5]
+
+
+def test_int_to_digits():
+    assert list(int_to_digits(1)) == [1]
+    assert list(int_to_digits(12)) == [1, 2]
+    assert list(int_to_digits(12345)) == [1, 2, 3, 4, 5]
+    assert list(int_to_digits(90000000)) == [9, 0, 0, 0, 0, 0, 0, 0]
 
 
 def test_triangle_number_generator():

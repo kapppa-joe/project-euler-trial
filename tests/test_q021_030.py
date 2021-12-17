@@ -1,5 +1,5 @@
 from constant_inputs.q022_names import Q022_names
-from q021_030 import count_consecutive_primes, decimal_unit_fraction, gen_abundant_number, have_amicable_pair, is_abundant_number, is_prime, name_score, q021, q022, q023, q024, q025, q026, q027, q028, q029, recur_cycle_length, sum_of_divisors
+from q021_030 import count_consecutive_primes, decimal_unit_fraction, digit_n_power_sum, gen_abundant_number, have_amicable_pair, is_abundant_number, is_prime, name_score, q021, q022, q023, q024, q025, q026, q027, q028, q029, q030, recur_cycle_length, sum_of_divisors
 
 
 def test_sum_of_divisors():
@@ -176,3 +176,20 @@ def test_q029():
     assert q029(10, 10) == 69
 
     assert q029(100, 100) == 9183
+
+
+def test_digit_n_power_sum():
+    assert digit_n_power_sum(1, 1) == 1
+    assert digit_n_power_sum(2, 2) == 4
+    assert digit_n_power_sum(12, 2) == 5
+    assert digit_n_power_sum(22, 2) == 8
+    assert digit_n_power_sum(1634, 4) == 1634
+    assert digit_n_power_sum(8208, 4) == 8208
+    assert digit_n_power_sum(9474, 4) == 9474
+
+
+def test_q030():
+    assert q030(2) == 0
+    assert q030(3) == 153 + 370 + 371 + 407
+    assert q030(4) == 19316
+    assert q030(5) == 443839  # 4150 + 4151 + 54748 + 92727 + 93084 + 194979

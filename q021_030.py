@@ -1,4 +1,4 @@
-from util import is_prime as check_is_prime, all_primes_below
+from util import int_to_digits, is_prime as check_is_prime, all_primes_below
 import functools
 import itertools
 import math
@@ -264,3 +264,23 @@ def q029(a_limit, b_limit: int) -> int:
             count_powers[a0].add(b0 * b)
 
     return sum(len(powers) for powers in count_powers.values())
+
+
+def digit_n_power_sum(number: int, n: int) -> int:
+    return sum(digit ** n for digit in int_to_digits(number))
+
+
+def q030(power: int) -> int:
+    # Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
+
+    if power < 2:
+        return 0
+
+    # compute a upper limit of number that can possibly be made by summing n power of digits
+    # for example, 9**4 * 6 is smaller than the smallest 6 digit num 100000,
+    # so we can know that any candidate number for the case of power = 4 must be less than 6 digits
+    digits_upper_limit = 0
+    while 9 ** power * (digits_upper_limit + 1) > 10 ** digits_upper_limit:
+        digits_upper_limit += 1
+
+    return sum(num for num in range(10, 10 ** digits_upper_limit) if digit_n_power_sum(num, power) == num)
