@@ -183,3 +183,27 @@ def count_digits(n: int) -> int:
         n = n // 10
         count += 1
     return count
+
+
+def is_pandigital(num: int, start: int = 1, stop: int = 9) -> bool:
+    # determine where a number is a pandigital num
+    str_num = str(num)
+    if len(str_num) != stop - start + 1:
+        return False
+    else:
+        return all(str(digit) in str_num for digit in range(start, stop + 1))
+
+
+def pandigital_generator(start_digit: int = 1, stop_digit: int = 9) -> Generator[int, None, None]:
+    # return a generator for pandigital numbers in asc order
+
+    if stop_digit < start_digit:
+        yield from ()
+    else:
+        permutations = itertools.permutations(
+            range(start_digit, stop_digit + 1))
+        for p in permutations:
+            num = 0
+            for digit in p:
+                num = num * 10 + digit
+            yield num

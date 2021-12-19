@@ -1,6 +1,6 @@
 import random
 from big_num import BigNum
-from util import all_divisors, count_digits, int_to_digits, nth, nth_fib, all_primes_below, is_prime, nth_prime, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, factorial, is_sum_of_two_elements
+from util import all_divisors, count_digits, int_to_digits, is_pandigital, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, factorial, is_sum_of_two_elements
 
 
 def test_nth_fib():
@@ -149,3 +149,32 @@ def test_count_digits():
     for _ in range(100):
         n = random.randint(0, 10**100)
         assert count_digits(n) == len(str(n))
+
+
+def test_is_pandigital():
+    assert is_pandigital(123456789) == True
+    assert is_pandigital(987654321) == True
+    assert is_pandigital(246813579) == True
+    assert is_pandigital(112345679) == False
+    assert is_pandigital(23456789) == False
+    assert is_pandigital(246813590) == False
+
+    assert is_pandigital(12345, 1, 5) == True
+    assert is_pandigital(12346, 1, 5) == False
+    assert is_pandigital(123456, 1, 5) == False
+    assert is_pandigital(43210, 0, 4) == True
+
+
+def test_pandigital_generator():
+    gen = pandigital_generator()
+    assert next(gen) == 123456789
+    assert next(gen) == 123456798
+    assert next(gen) == 123456879
+    assert next(gen) == 123456897
+    assert next(gen) == 123456978
+    assert next(gen) == 123456987
+    *_, last = gen
+    assert last == 987654321
+
+    gen2 = pandigital_generator(1, 3)
+    assert list(gen2) == [123, 132, 213, 231, 312, 321]
