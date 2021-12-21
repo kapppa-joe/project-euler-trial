@@ -1,6 +1,6 @@
 import random
 from big_num import BigNum
-from util import all_divisors, count_digits, int_to_digits, is_pandigital, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, factorial, is_sum_of_two_elements
+from util import all_divisors, count_digits, int_to_digits, is_pandigital, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
 
 
 def test_nth_fib():
@@ -110,11 +110,11 @@ def test_all_divisors():
 
 
 def test_factorial():
-    assert factorial(BigNum('1')) == BigNum('1')
-    assert factorial(BigNum('2')) == BigNum('2')
-    assert factorial(BigNum('3')) == BigNum('6')
-    assert factorial(BigNum('4')) == BigNum('24')
-    assert factorial(BigNum('5')) == BigNum('120')
+    assert bignum_factorial(BigNum('1')) == BigNum('1')
+    assert bignum_factorial(BigNum('2')) == BigNum('2')
+    assert bignum_factorial(BigNum('3')) == BigNum('6')
+    assert bignum_factorial(BigNum('4')) == BigNum('24')
+    assert bignum_factorial(BigNum('5')) == BigNum('120')
 
 
 def test_is_sum_of_two_elements():

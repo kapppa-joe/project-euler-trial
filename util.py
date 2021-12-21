@@ -153,11 +153,11 @@ def all_divisors(n: int) -> list[int]:
     return first_half + second_half
 
 
-def factorial(n: BigNum) -> BigNum:
+def bignum_factorial(n: BigNum) -> BigNum:
     if n == BigNum('0'):
         return BigNum('1')
     else:
-        return n * factorial(n - BigNum('1'))
+        return n * bignum_factorial(n - BigNum('1'))
 
 
 def is_sum_of_two_elements(n: int, num_list: list[int]) -> bool:
