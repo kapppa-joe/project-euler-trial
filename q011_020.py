@@ -7,7 +7,7 @@ from constant_inputs.q013_input import Q013_input_string
 from constant_inputs.q018_input import Q018_triangle_raw_input
 from number_in_words import count_letters, number_in_words
 from number_triangle import NumberTriangle
-from util import all_divisors, factorial, is_even, product, triangle_number_generator
+from util import all_divisors, bignum_factorial, is_even, product, triangle_number_generator
 
 
 def q011(input_grid: str = Q011_grid_raw, n: int = 4) -> int:
@@ -169,7 +169,7 @@ def q019() -> int:
 
 def q020(n: int) -> int:
     # Find the sum of the digits in the number 100! (factorial of 100)
-    fac = factorial(BigNum(str(n)))
+    fac = bignum_factorial(BigNum(str(n)))
     sum_of_digits = 0
     pointer = fac.head
     while pointer:
