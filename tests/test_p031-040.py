@@ -2,6 +2,7 @@ from p031 import CoinChange, DefaultCoinSet, p031
 import pytest
 
 from p033 import digit_cancelling_fractions
+from p034 import digit_factorials_sum
 
 
 @pytest.fixture
@@ -40,3 +41,12 @@ def test_p033_digit_cancelling_fractions():
     assert digit_cancelling_fractions(1, 4) == True  # 16 / 64
     assert digit_cancelling_fractions(1, 5) == True  # 19 / 95
     assert digit_cancelling_fractions(2, 5) == True  # 26 / 65
+
+
+def test_p034_digit_factorials_sum():
+    assert digit_factorials_sum(1) == 1
+    assert digit_factorials_sum(10) == 2  # 1 + 1
+    assert digit_factorials_sum(12) == 3  # 1 + 2
+    assert digit_factorials_sum(34) == 30  # 6 + 24
+    assert digit_factorials_sum(134) == 31
+    assert digit_factorials_sum(9999) == 362880 * 4

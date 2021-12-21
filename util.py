@@ -207,3 +207,18 @@ def pandigital_generator(start_digit: int = 1, stop_digit: int = 9) -> Generator
             for digit in p:
                 num = num * 10 + digit
             yield num
+
+
+def factorial(n: int, memo: dict[int, int] = {}) -> int:
+    if n >= 0:
+        if n in memo:
+            return memo[n]
+        elif n == 0:
+            memo[0] = 1
+            return 1
+        else:
+            result = n * factorial(n - 1, memo)
+            memo[n] = result
+            return result
+    else:
+        return 0

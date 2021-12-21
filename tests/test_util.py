@@ -1,6 +1,6 @@
 import random
 from big_num import BigNum
-from util import all_divisors, count_digits, int_to_digits, is_pandigital, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
+from util import all_divisors, count_digits, factorial, int_to_digits, is_pandigital, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
 
 
 def test_nth_fib():
@@ -109,7 +109,7 @@ def test_all_divisors():
     assert all_divisors(60) == [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60]
 
 
-def test_factorial():
+def test_bignum_factorial():
     assert bignum_factorial(BigNum('1')) == BigNum('1')
     assert bignum_factorial(BigNum('2')) == BigNum('2')
     assert bignum_factorial(BigNum('3')) == BigNum('6')
@@ -178,3 +178,19 @@ def test_pandigital_generator():
 
     gen2 = pandigital_generator(1, 3)
     assert list(gen2) == [123, 132, 213, 231, 312, 321]
+
+
+def test_factorial():
+    assert factorial(0) == 1
+    assert factorial(1) == 1
+    assert factorial(-1) == 0
+    assert factorial(2) == 2
+    assert factorial(3) == 6
+    assert factorial(4) == 24
+    assert factorial(5) == 120
+
+    # test for memoization
+    memo = {}
+    factorial(9, memo)
+    assert memo[9] == 362880
+    assert memo[8] == 40320
