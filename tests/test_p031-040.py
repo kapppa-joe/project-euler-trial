@@ -3,6 +3,7 @@ import pytest
 
 from p033 import digit_cancelling_fractions
 from p034 import digit_factorials_sum
+from p035 import is_circular_prime, p035
 
 
 @pytest.fixture
@@ -50,3 +51,19 @@ def test_p034_digit_factorials_sum():
     assert digit_factorials_sum(34) == 30  # 6 + 24
     assert digit_factorials_sum(134) == 31
     assert digit_factorials_sum(9999) == 362880 * 4
+
+
+test_cases_p035_is_circular_prime = [(2, True), (3, True), (5, True), (7, True), (11, True), (13, True), (17, True), (19, False), (23, False), (
+    29, False), (31, True), (37, True), (41, False), (43, False), (47, False), (53, False), (59, False), (79, True), (97, True), (197, True), (1193, True), (99371, True), (999331, True)]
+
+
+@pytest.mark.parametrize("prime, expectedOutput", test_cases_p035_is_circular_prime)
+def test_p035_is_circular_prime(prime, expectedOutput):
+    assert is_circular_prime(prime) == expectedOutput
+
+
+def test_p035():
+    assert p035(2) == 0
+    assert p035(10) == 4
+    assert p035(100) == 13
+    assert p035(1_000_000) == 55

@@ -1,6 +1,6 @@
 import random
 from big_num import BigNum
-from util import all_divisors, count_digits, factorial, int_to_digits, is_pandigital, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
+from util import all_divisors, count_digits, factorial, has_even_digit, int_to_digits, is_pandigital, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, rotate_digits, rotate_digits_iter, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
 
 
 def test_nth_fib():
@@ -194,3 +194,54 @@ def test_factorial():
     factorial(9, memo)
     assert memo[9] == 362880
     assert memo[8] == 40320
+
+
+def test_rotate_digits():
+    assert rotate_digits(1, 1) == 1
+    assert rotate_digits(12, 1) == 21
+    assert rotate_digits(12, 2) == 12
+    assert rotate_digits(12, 9999999) == 21
+
+    assert rotate_digits(1234567, 3) == 5671234
+    assert rotate_digits(1234567, 780) == 5671234
+
+    assert rotate_digits(1234567, -3) == 4567123
+    assert rotate_digits(1234567, -500) == 4567123
+
+    assert rotate_digits(100, 1) == 10
+    assert rotate_digits(100, 2) == 1
+    assert rotate_digits(100, 3) == 100
+    assert rotate_digits(1002, 1) == 2100
+    assert rotate_digits(1002, 2) == 210
+    assert rotate_digits(1002, 3) == 21
+    assert rotate_digits(10203, 1) == 31020
+    assert rotate_digits(10203, 2) == 3102
+    assert rotate_digits(10203, 3) == 20310
+    assert rotate_digits(10203, 4) == 2031
+    assert rotate_digits(10203, 5) == 10203
+
+
+def test_rotate_digits_iter():
+    assert list(rotate_digits_iter(1)) == []
+    assert list(rotate_digits_iter(10)) == [1]
+    assert list(rotate_digits_iter(11)) == [11]
+    assert list(rotate_digits_iter(12)) == [21]
+    assert list(rotate_digits_iter(123)) == [312, 231]
+    assert list(rotate_digits_iter(100)) == [10, 1]
+    assert list(rotate_digits_iter(1003)) == [3100, 310, 31]
+    assert list(rotate_digits_iter(304050)) == [
+        30405, 503040, 50304, 405030, 40503]
+
+
+def test_has_even_digit():
+    assert has_even_digit(0) == True
+    assert has_even_digit(1) == False
+    assert has_even_digit(2) == True
+    assert has_even_digit(4) == True
+    assert has_even_digit(6) == True
+    assert has_even_digit(8) == True
+    assert has_even_digit(10) == True
+    assert has_even_digit(11) == False
+    assert has_even_digit(13) == False
+    assert has_even_digit(13579) == False
+    assert has_even_digit(135790) == True

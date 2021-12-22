@@ -222,3 +222,22 @@ def factorial(n: int, memo: dict[int, int] = {}) -> int:
             return result
     else:
         return 0
+
+
+def rotate_digits(num: int, i: int) -> int:
+    # rotate the digits of a number to left or right
+    num_str = str(num)
+    i = i % len(num_str)
+    return int(num_str[-i:] + num_str[:-i])
+
+
+def rotate_digits_iter(num: int) -> Generator[int, None, None]:
+    # return a generator of numbers made by digits rotation.
+    num_str = str(num)
+    for i in range(1, len(num_str)):
+        yield int(num_str[-i:] + num_str[:-i])
+
+
+def has_even_digit(num: int) -> bool:
+    # check whether a number contains a even digit (0,2,4,6,8)
+    return any(digit in "02468" for digit in str(num))
