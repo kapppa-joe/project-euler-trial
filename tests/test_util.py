@@ -1,6 +1,6 @@
 import random
 from big_num import BigNum
-from util import all_divisors, count_digits, factorial, has_even_digit, int_to_digits, is_pandigital, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, rotate_digits, rotate_digits_iter, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
+from util import all_divisors, count_digits, factorial, has_even_digit, int_to_digits, is_palindromic_bin, is_pandigital, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, rotate_digits, rotate_digits_iter, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
 
 
 def test_nth_fib():
@@ -55,6 +55,18 @@ def test_is_palinromic_num():
     assert is_palindromic_num(3443) == True
     assert is_palindromic_num(34542) == False
     assert is_palindromic_num(34543) == True
+
+
+def test_is_palindromic_bin():
+    assert is_palindromic_bin(0b0000) == True
+    assert is_palindromic_bin(0b0001) == True
+    assert is_palindromic_bin(0b0010) == False
+    assert is_palindromic_bin(0b0011) == True
+    assert is_palindromic_bin(0b0100) == False
+    assert is_palindromic_bin(0b0101) == True
+    assert is_palindromic_bin(0b0110) == False
+    assert is_palindromic_bin(0b0111) == True
+    assert is_palindromic_bin(0b1000) == False
 
 
 def test_gcd():

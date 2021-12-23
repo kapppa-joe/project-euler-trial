@@ -108,6 +108,11 @@ def is_palindromic_num(input: int) -> bool:
     return is_palindromic(str(input))
 
 
+def is_palindromic_bin(input: int) -> bool:
+    # check whether a number is palindromic in its binary representation
+    return is_palindromic(bin(input)[2:])
+
+
 def gcd(a: int, b: int) -> int:
     # compute the greatest common divisor of two ints
     if b == 0:

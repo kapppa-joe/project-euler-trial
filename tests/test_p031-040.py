@@ -4,6 +4,7 @@ import pytest
 from p033 import digit_cancelling_fractions
 from p034 import digit_factorials_sum
 from p035 import is_circular_prime, p035
+from p036 import p036
 
 
 @pytest.fixture
@@ -67,3 +68,15 @@ def test_p035():
     assert p035(10) == 4
     assert p035(100) == 13
     assert p035(1_000_000) == 55
+
+
+def test_p036():
+    assert p036(1) == 0
+    assert p036(2) == 1  # 0b1
+    assert p036(3) == 1  # 0b10 is not binary palindromic
+    assert p036(4) == 4  # ob01 + 0b11
+    assert p036(6) == 9
+    assert p036(8) == 16
+    assert p036(10) == 25
+    assert p036(34) == 58  # bin(33) == 0b100001
+    assert p036(1_000_000) == 872187
