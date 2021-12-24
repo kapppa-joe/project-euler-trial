@@ -1,10 +1,13 @@
-from p031_040.p031 import CoinChange, DefaultCoinSet, p031
 import pytest
+import itertools
 
+from p031_040.p031 import CoinChange, DefaultCoinSet, p031
 from p031_040.p033 import digit_cancelling_fractions
 from p031_040.p034 import digit_factorials_sum
 from p031_040.p035 import is_circular_prime, p035
 from p031_040.p036 import p036
+from p031_040.p037 import build_both_sides_truncatable_primes, build_ltr, build_rtl, is_both_sides_truncatable_prime, trunc_left, trunc_right
+from util import is_prime
 
 
 @pytest.fixture
@@ -80,3 +83,61 @@ def test_p036():
     assert p036(10) == 25
     assert p036(34) == 58  # bin(33) == 0b100001
     assert p036(1_000_000) == 872187
+
+
+def test_p037_build_ltr():
+    g = build_ltr(prime_checker=is_prime)
+    outputs = itertools.takewhile(lambda x: x < 2500, g)
+    assert list(outputs) == [23, 29, 31, 37, 53, 59, 71, 73, 79,
+                             233, 239, 293, 311, 313, 317, 373, 379, 593, 599, 719, 733, 739, 797,
+                             2333, 2339, 2393, 2399]
+
+
+def test_p037_build_rtl():
+    g = build_rtl(prime_checker=is_prime)
+    outputs = itertools.takewhile(lambda x: x < 2500, g)
+    assert list(outputs) == [13, 17, 23, 37, 53, 73, 97,
+                             113, 137, 173, 197, 223, 313, 317, 337, 353, 373, 397, 523, 773, 797, 937, 953, 997,
+                             1223, 1373, 1523, 1997, 2113, 2137]
+
+
+def test_p037_trunc_left():
+    assert trunc_left(10) == 0
+    assert trunc_left(11) == 1
+    assert trunc_left(17) == 7
+    assert trunc_left(173) == 73
+    assert trunc_left(1573) == 573
+    assert trunc_left(1000) == 0
+    assert trunc_left(1010) == 10
+
+
+def test_p037_trunc_right():
+    assert trunc_right(10) == 1
+    assert trunc_right(11) == 1
+    assert trunc_right(71) == 7
+    assert trunc_right(173) == 17
+    assert trunc_right(1573) == 157
+    assert trunc_right(1000) == 100
+    assert trunc_right(1010) == 101
+
+
+def test_p037_is_both_sides_truncatable_prime():
+    assert is_both_sides_truncatable_prime(11) == False  # 1 is not prime
+    assert is_both_sides_truncatable_prime(23) == True  # 2 and 3 are primes
+    assert is_both_sides_truncatable_prime(223) == False
+
+    assert is_both_sides_truncatable_prime(27) == False
+    assert is_both_sides_truncatable_prime(33) == False
+    assert is_both_sides_truncatable_prime(37) == True
+    assert is_both_sides_truncatable_prime(373) == True
+
+    assert is_both_sides_truncatable_prime(53) == True
+    assert is_both_sides_truncatable_prime(353) == False
+
+    assert is_both_sides_truncatable_prime(3797) == True
+
+
+def test_p037_build_both_sides_truncatable_primes():
+    result = build_both_sides_truncatable_primes(count=11)
+    for num in result:
+        assert is_both_sides_truncatable_prime(num)
