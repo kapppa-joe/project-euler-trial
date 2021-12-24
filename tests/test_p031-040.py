@@ -1,10 +1,10 @@
-from p031 import CoinChange, DefaultCoinSet, p031
+from p031_040.p031 import CoinChange, DefaultCoinSet, p031
 import pytest
 
-from p033 import digit_cancelling_fractions
-from p034 import digit_factorials_sum
-from p035 import is_circular_prime, p035
-from p036 import p036
+from p031_040.p033 import digit_cancelling_fractions
+from p031_040.p034 import digit_factorials_sum
+from p031_040.p035 import is_circular_prime, p035
+from p031_040.p036 import p036
 
 
 @pytest.fixture
