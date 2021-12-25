@@ -7,6 +7,7 @@ from p031_040.p034 import digit_factorials_sum
 from p031_040.p035 import is_circular_prime, p035
 from p031_040.p036 import p036
 from p031_040.p037 import build_both_sides_truncatable_primes, build_ltr, build_rtl, is_both_sides_truncatable_prime, trunc_left, trunc_right
+from p031_040.p038 import concatenated_product
 from util import is_prime
 
 
@@ -141,3 +142,12 @@ def test_p037_build_both_sides_truncatable_primes():
     result = build_both_sides_truncatable_primes(count=11)
     for num in result:
         assert is_both_sides_truncatable_prime(num)
+
+
+def test_p038_concatenated_product():
+    assert concatenated_product(1) == 123456789
+    assert concatenated_product(2) == 2468101214
+    assert concatenated_product(3) == 369121518
+    assert concatenated_product(9) == 918273645
+    assert concatenated_product(18) == 1836547290
+    assert concatenated_product(192) == 192384576

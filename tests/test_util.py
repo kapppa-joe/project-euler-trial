@@ -1,6 +1,6 @@
 import random
 from big_num import BigNum
-from util import all_divisors, count_digits, factorial, has_even_digit, int_to_digits, is_palindromic_bin, is_pandigital, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, rotate_digits, rotate_digits_iter, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
+from util import all_divisors, count_digits, factorial, first_true, has_even_digit, int_to_digits, is_palindromic_bin, is_pandigital, join_nums, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, rotate_digits, rotate_digits_iter, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
 
 
 def test_nth_fib():
@@ -257,3 +257,17 @@ def test_has_even_digit():
     assert has_even_digit(13) == False
     assert has_even_digit(13579) == False
     assert has_even_digit(135790) == True
+
+
+def test_join_nums():
+    assert join_nums(1, 2, 3, 4) == 1234
+    assert join_nums(1, 0, 0, 1) == 1001
+    assert join_nums(0, 1, 2, 0, 3, 4) == 12034
+    assert join_nums(0, 12, 345, 6, 789) == 123456789
+
+
+def test_first_true():
+    assert first_true([0, [], 1]) == 1
+    assert first_true([False, 0, []], default='a') == 'a'
+    assert first_true(range(100), pred=lambda x: x > 10) == 11
+    assert first_true(range(100), pred=lambda x: x > 100, default=None) == None
