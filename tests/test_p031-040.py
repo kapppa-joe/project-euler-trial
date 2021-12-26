@@ -8,6 +8,7 @@ from p031_040.p035 import is_circular_prime, p035
 from p031_040.p036 import p036
 from p031_040.p037 import build_both_sides_truncatable_primes, build_ltr, build_rtl, is_both_sides_truncatable_prime, trunc_left, trunc_right
 from p031_040.p038 import concatenated_product
+from p031_040.p039 import count_right_angle_triangles, is_right_angle_triangle, p039
 from util import is_prime
 
 
@@ -151,3 +152,29 @@ def test_p038_concatenated_product():
     assert concatenated_product(9) == 918273645
     assert concatenated_product(18) == 1836547290
     assert concatenated_product(192) == 192384576
+
+
+def test_p039_is_right_angle_triangle():
+    assert is_right_angle_triangle(3, 4, 5) == True
+    assert is_right_angle_triangle(20, 48, 52) == True
+    assert is_right_angle_triangle(20, 47, 52) == False
+    assert is_right_angle_triangle(24, 45, 51) == True
+    assert is_right_angle_triangle(30, 40, 50) == True
+
+
+def test_count_right_angle_triangles():
+    assert count_right_angle_triangles(1) == 0
+    assert count_right_angle_triangles(12) == 1
+    assert count_right_angle_triangles(30) == 1
+    assert count_right_angle_triangles(40) == 1
+    assert count_right_angle_triangles(56) == 1
+    assert count_right_angle_triangles(70) == 1
+    assert count_right_angle_triangles(120) == 3
+
+
+def test_p039():
+    assert p039(1) == 0
+    assert p039(12) == 12
+    assert p039(60) == 60  # 60 has two
+    assert p039(120) == 120
+    assert p039(1000) == 840
