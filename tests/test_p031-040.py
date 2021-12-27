@@ -9,6 +9,7 @@ from p031_040.p036 import p036
 from p031_040.p037 import build_both_sides_truncatable_primes, build_ltr, build_rtl, is_both_sides_truncatable_prime, trunc_left, trunc_right
 from p031_040.p038 import concatenated_product
 from p031_040.p039 import count_right_angle_triangles, is_right_angle_triangle, p039
+from p031_040.p040 import champernowne_generator
 from util import is_prime
 
 
@@ -178,3 +179,11 @@ def test_p039():
     assert p039(60) == 60  # 60 has two
     assert p039(120) == 120
     assert p039(1000) == 840
+
+
+def test_p040_champernowne():
+    g = champernowne_generator()
+    expected_output = [int(char)
+                       for char in '123456789101112131415161718192021']
+    actual_output = list(itertools.islice(g, len(expected_output)))
+    assert actual_output == expected_output
