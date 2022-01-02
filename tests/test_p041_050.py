@@ -4,6 +4,7 @@ from p041_050.p041 import find_largest_pandigital_prime
 from p041_050.p042 import is_triangle_number, word_value
 from p041_050.p043 import satisfy_divisible_properties
 from p041_050.p045 import p045
+from p041_050.p046 import is_sum_of_prime_and_twice_a_square, odd_composite_nums, square_nums
 from util import int_to_digits
 
 
@@ -55,3 +56,23 @@ def test_p045():
     assert p045(lower_limit=0) == 1
     assert p045(lower_limit=1) == 40755
     assert p045(lower_limit=40755) == 1533776805
+
+
+def test_p046_odd_composite_nums():
+    gen = odd_composite_nums()
+    assert next(gen) == 9
+    assert next(gen) == 15
+    assert next(gen) == 21
+    assert next(gen) == 25
+    assert next(gen) == 27
+    assert next(gen) == 33
+
+
+def test_p046_square_nums():
+    assert list(square_nums(10)) == [1, 4, 9]
+    assert list(square_nums(100)) == [1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+
+def test_p046_is_sum_of_prime_and_twice_a_square():
+    for i in [9, 15, 21, 25, 27, 33]:
+        assert is_sum_of_prime_and_twice_a_square(i) == True

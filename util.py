@@ -264,3 +264,26 @@ def first_true(iterable, default=False, pred=None):
     # first_true([a,b,c], x) --> a or b or c or x
     # first_true([a,b], x, f) --> a if f(a) else b if f(b) else x
     return next(filter(pred, iterable), default)
+
+
+def make_prime_checker(memo_num: int = 1_000_000):
+    # a prime checker with memoization feature and can extend the memo upper limit
+    # for over 1_000_000,
+    primes = set(all_primes_below(memo_num))
+    not_primes = set()
+    upper_limit = memo_num
+
+    def prime_checker(num: int) -> bool:
+        nonlocal upper_limit
+        if num in primes:
+            return True
+        elif num in not_primes or num < upper_limit:
+            return False
+        else:
+            result = is_prime(num)
+            if result:
+                primes.add(num)
+            else:
+                not_primes.add(num)
+            return result
+    return prime_checker

@@ -1,6 +1,6 @@
 import random
 from big_num import BigNum
-from util import all_divisors, count_digits, factorial, first_true, has_even_digit, int_to_digits, is_palindromic_bin, is_pandigital, join_nums, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, rotate_digits, rotate_digits_iter, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
+from util import all_divisors, count_digits, factorial, first_true, has_even_digit, int_to_digits, is_palindromic_bin, is_pandigital, join_nums, make_prime_checker, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, rotate_digits, rotate_digits_iter, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
 
 
 def test_nth_fib():
@@ -271,3 +271,10 @@ def test_first_true():
     assert first_true([False, 0, []], default='a') == 'a'
     assert first_true(range(100), pred=lambda x: x > 10) == 11
     assert first_true(range(100), pred=lambda x: x > 100, default=None) == None
+
+
+def test_make_prime_checker():
+    prime_checker = make_prime_checker(1_000_000)
+    primes = set(all_primes_below(1_005_000))
+    for num in range(2, 1_005_000):
+        assert prime_checker(num) == (num in primes)
