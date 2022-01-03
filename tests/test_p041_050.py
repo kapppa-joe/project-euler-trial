@@ -5,6 +5,7 @@ from p041_050.p042 import is_triangle_number, word_value
 from p041_050.p043 import satisfy_divisible_properties
 from p041_050.p045 import p045
 from p041_050.p046 import is_sum_of_prime_and_twice_a_square, odd_composite_nums, square_nums
+from p041_050.p047 import count_distinct_prime_factors, find_consecutive_non_prime, p047, to_prime_factors
 from util import int_to_digits
 
 
@@ -76,3 +77,44 @@ def test_p046_square_nums():
 def test_p046_is_sum_of_prime_and_twice_a_square():
     for i in [9, 15, 21, 25, 27, 33]:
         assert is_sum_of_prime_and_twice_a_square(i) == True
+
+
+test_cases_p047_to_prime_factors = [
+    (2, [2]),
+    (3, [3]),
+    (6, [2, 3]),
+    (10, [2, 5]),
+    (14, [2, 7]),
+    (15, [3, 5]),
+    (60, [2, 2, 3, 5]),
+    (80, [2, 2, 2, 2, 5]),
+    (644, [2, 2, 7, 23]),
+]
+
+
+@pytest.mark.parametrize("num, expected_output", test_cases_p047_to_prime_factors)
+def test_p047_to_prime_factors(num, expected_output):
+    assert list(to_prime_factors(num)) == expected_output
+
+
+def test_p047_count_distinct_prime_factors():
+    assert count_distinct_prime_factors(2) == 1
+    assert count_distinct_prime_factors(10) == 2
+    assert count_distinct_prime_factors(14) == 2
+    assert count_distinct_prime_factors(80) == 2
+    assert count_distinct_prime_factors(644) == 3
+    assert count_distinct_prime_factors(645) == 3
+    assert count_distinct_prime_factors(646) == 3
+
+
+def test_p047_find_consecutive_non_prime():
+    assert find_consecutive_non_prime(start=2, consecutive_nums=2) == 8
+    assert find_consecutive_non_prime(start=10, consecutive_nums=2) == 14
+    assert find_consecutive_non_prime(start=600, consecutive_nums=3) == 602
+    assert find_consecutive_non_prime(start=611, consecutive_nums=3) == 614
+    assert find_consecutive_non_prime(start=640, consecutive_nums=3) == 644
+
+
+def test_p047():
+    assert p047(consecutive_nums=2, distinct_prime_factors=2) == 14
+    assert p047(consecutive_nums=3, distinct_prime_factors=3) == 644
