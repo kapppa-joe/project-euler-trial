@@ -1,4 +1,5 @@
 import pytest
+import random
 
 from p041_050.p041 import find_largest_pandigital_prime
 from p041_050.p042 import is_triangle_number, word_value
@@ -6,6 +7,7 @@ from p041_050.p043 import satisfy_divisible_properties
 from p041_050.p045 import p045
 from p041_050.p046 import is_sum_of_prime_and_twice_a_square, odd_composite_nums, square_nums
 from p041_050.p047 import count_distinct_prime_factors, find_consecutive_non_prime, p047, to_prime_factors
+from p041_050.p048 import multiply_keep_last_digits, p048, power_last_digits
 from util import int_to_digits
 
 
@@ -118,3 +120,34 @@ def test_p047_find_consecutive_non_prime():
 def test_p047():
     assert p047(consecutive_nums=2, distinct_prime_factors=2) == 14
     assert p047(consecutive_nums=3, distinct_prime_factors=3) == 644
+
+
+def test_p048_multiply_keep_last_digits():
+    assert multiply_keep_last_digits(
+        1000, 123456789, digits_to_keep=10) == 3456789000
+    assert multiply_keep_last_digits(
+        1000, 123456789, digits_to_keep=11) == 23456789000
+    assert multiply_keep_last_digits(
+        1000, 123456789, digits_to_keep=5) == 89000
+
+    # random test
+    for i in range(50):
+        a = random.randint(1, 10 ** 10)
+        b = random.randint(1, 10 ** 10)
+        digits = random.randint(1, 10)
+        output = multiply_keep_last_digits(a, b, digits)
+        assert output == int(str(a * b)[-digits:])
+
+
+def test_p048_power_last_digits():
+    assert power_last_digits(9, 9) == 387420489
+    assert power_last_digits(11, 11, digits_to_keep=10) == 5311670611
+    assert power_last_digits(11, 11, digits_to_keep=12) == 285311670611
+    assert power_last_digits(12345, 20) == 5400390625
+    assert power_last_digits(999, 999) == 499998999
+
+
+def test_p048():
+    assert p048(10) == 405071317
+    assert p048(10, digits_to_keep=11) == 10405071317
+    assert p048(1000) == 9110846700

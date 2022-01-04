@@ -15,11 +15,23 @@ class BigNum:
             number_string = number_string[1:]
         if not number_string.isdigit():
             raise ValueError('cannot interpret input string')
-        self.head = Node(number_string)
+
+        digits = reversed(number_string)
+        self.head = Node(next(digits))
+        pointer = self.head
+        for d in digits:
+            pointer.next = Node(d)
+            pointer = pointer.next
+        self.head.handle_trailing_zeros()
 
     def __str__(self):
         sign = '-' if self.isNegative else ''
-        return sign + str(self.head)
+        pointer = self.head
+        str_acc = ''
+        while pointer:
+            str_acc = str(pointer.digit) + str_acc
+            pointer = pointer.next
+        return sign + str_acc
 
     def __repr__(self):
         return f'BigNum(\'{str(self)}\')'
