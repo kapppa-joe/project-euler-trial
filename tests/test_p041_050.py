@@ -8,6 +8,7 @@ from p041_050.p045 import p045
 from p041_050.p046 import is_sum_of_prime_and_twice_a_square, odd_composite_nums, square_nums
 from p041_050.p047 import count_distinct_prime_factors, find_consecutive_non_prime, p047, to_prime_factors
 from p041_050.p048 import multiply_keep_last_digits, p048, power_last_digits
+from p041_050.p049 import p049
 from util import int_to_digits
 
 
@@ -151,3 +152,10 @@ def test_p048():
     assert p048(10) == 405071317
     assert p048(10, digits_to_keep=11) == 10405071317
     assert p048(1000) == 9110846700
+
+
+def test_p049():
+    assert p049(1) == []
+    assert p049(2) == []
+    assert p049(3) == []
+    assert (1487, 4817, 8147) in p049(4)
