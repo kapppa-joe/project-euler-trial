@@ -1,5 +1,7 @@
 from typing import Generator, Iterable
 
+from util import factorial
+
 
 def gen_permutation(input: Iterable) -> Generator[tuple, None, None]:
     # return a generator of lexicographic permutations
@@ -25,3 +27,17 @@ def gen_permutation(input: Iterable) -> Generator[tuple, None, None]:
         curr[swap], curr[pivot] = curr[pivot], curr[swap]
         curr = curr[:pivot + 1] + sorted(curr[pivot + 1:])
         yield tuple(curr)
+
+
+factorial_memo = {}
+
+
+def fac(n: int) -> int:
+    return factorial(n, factorial_memo)
+
+
+def nCr(n: int, r: int) -> int:
+    if n < r:
+        return 0
+    else:
+        return fac(n) // (fac(r) * fac(n - r))

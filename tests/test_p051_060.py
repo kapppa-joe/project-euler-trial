@@ -1,6 +1,6 @@
 from p051_060.p051 import determine_same_digit_group, same_digit
 from p051_060.p052 import are_permutation, has_n_permuted_multiples
-from util import all_primes_below
+from p051_060.p053 import p053
 
 
 def test_p051_same_digit_group():
@@ -29,3 +29,8 @@ def test_p052_are_permutation():
 
 def test_p052_has_n_permuted_multiples():
     assert has_n_permuted_multiples(125874, 2) == True
+
+
+def test_p053():
+    assert p053(22) == 0
+    assert p053(23) == 4
