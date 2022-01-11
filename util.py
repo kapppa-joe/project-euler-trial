@@ -104,8 +104,8 @@ def is_palindromic(string: str) -> bool:
         return (string[0] == string[-1]) and is_palindromic(string[1:-1])
 
 
-def is_palindromic_num(input: int) -> bool:
-    return is_palindromic(str(input))
+# def is_palindromic_num(input: int) -> bool:
+    # return is_palindromic(str(input))
 
 
 def is_palindromic_bin(input: int) -> bool:
@@ -287,3 +287,15 @@ def make_prime_checker(memo_num: int = 1_000_000):
                 not_primes.add(num)
             return result
     return prime_checker
+
+
+def reverse_digits(num: int, base: int = 10) -> int:
+    result = 0
+    while num > 0:
+        result = result * base + num % base
+        num //= base
+    return result
+
+
+def is_palindromic_num(num, base: int = 10) -> int:
+    return num == reverse_digits(num, base=base)

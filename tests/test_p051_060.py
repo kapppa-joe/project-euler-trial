@@ -4,6 +4,7 @@ from p051_060.p051 import determine_same_digit_group, same_digit
 from p051_060.p052 import are_permutation, has_n_permuted_multiples
 from p051_060.p053 import p053
 from p051_060.p054 import PokerHand, Rank
+from p051_060.p055 import check_lychrel, reverse_add, is_palindromic
 
 
 def test_p051_same_digit_group():
@@ -134,3 +135,18 @@ def test_p054_compare_hands(hand1_cards, hand2_cards, player1_wins, hand1_rank, 
     assert hand2.score[0] == hand2_rank
     assert hand1.score[1] == hand1_rank_value
     assert hand2.score[1] == hand2_rank_value
+
+
+def test_p055_reverse_add():
+    assert reverse_add(47) == 121
+    assert reverse_add(349) == 1292
+    assert reverse_add(1292) == 4213
+    assert reverse_add(4213) == 7337
+
+
+def test_p055_check_lychrel():
+    assert check_lychrel(47) == False
+    assert check_lychrel(74) == False
+    assert check_lychrel(196) == True
+    assert check_lychrel(349) == False
+    assert check_lychrel(4994) == True

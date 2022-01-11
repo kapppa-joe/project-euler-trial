@@ -1,6 +1,6 @@
 import random
 from big_num import BigNum
-from util import all_divisors, count_digits, factorial, first_true, has_even_digit, int_to_digits, is_palindromic_bin, is_pandigital, join_nums, make_prime_checker, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, rotate_digits, rotate_digits_iter, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
+from util import all_divisors, count_digits, factorial, first_true, has_even_digit, int_to_digits, is_palindromic_bin, is_pandigital, join_nums, make_prime_checker, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, reverse_digits, rotate_digits, rotate_digits_iter, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
 
 
 def test_nth_fib():
@@ -278,3 +278,18 @@ def test_make_prime_checker():
     primes = set(all_primes_below(1_005_000))
     for num in range(2, 1_005_000):
         assert prime_checker(num) == (num in primes)
+
+
+def test_reverse_digits():
+    assert reverse_digits(1) == 1
+    assert reverse_digits(10) == 1
+    assert reverse_digits(123) == 321
+    assert reverse_digits(1000) == 1
+    assert reverse_digits(
+        576838365960837657684635252) == 252536486756738069563838675
+
+    # test other base
+    assert reverse_digits(0b10, 2) == (0b01)
+    assert reverse_digits(0b10101110, 2) == (0b01110101)
+    assert reverse_digits(0o1237, 8) == (0o7321)
+    assert reverse_digits(0x1abf, 16) == (0xfba1)
