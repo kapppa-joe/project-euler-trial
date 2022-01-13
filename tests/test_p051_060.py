@@ -6,6 +6,7 @@ from p051_060.p053 import p053
 from p051_060.p054 import PokerHand, Rank
 from p051_060.p055 import check_lychrel, reverse_add
 from p051_060.p056 import p056
+from p051_060.p057 import fraction_seq, p057
 
 
 def test_p051_same_digit_group():
@@ -158,3 +159,21 @@ def test_p056():
     assert p056(4, 4) == 9
     assert p056(10, 10) == 45  # 9 ** 9
     assert p056(20, 20) == 127
+
+
+def test_p057_fraction_seq():
+    assert fraction_seq(1) == (3, 2)
+    assert fraction_seq(2) == (7, 5)
+    assert fraction_seq(3) == (17, 12)
+    assert fraction_seq(4) == (41, 29)
+    assert fraction_seq(5) == (99, 70)
+    assert fraction_seq(6) == (239, 169)
+    assert fraction_seq(7) == (577, 408)
+    assert fraction_seq(8) == (1393, 985)
+
+
+def test_p057():
+    assert p057(7) == 0
+    assert p057(8) == 1
+    assert p057(12) == 1
+    assert p057(13) == 2  # 13th is (114243, 80782)
