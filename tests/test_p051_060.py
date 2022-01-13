@@ -7,6 +7,7 @@ from p051_060.p054 import PokerHand, Rank
 from p051_060.p055 import check_lychrel, reverse_add
 from p051_060.p056 import p056
 from p051_060.p057 import fraction_seq, p057
+from p051_060.p058 import p058, spiral_diagonal_generator
 
 
 def test_p051_same_digit_group():
@@ -177,3 +178,16 @@ def test_p057():
     assert p057(8) == 1
     assert p057(12) == 1
     assert p057(13) == 2  # 13th is (114243, 80782)
+
+
+def test_p058_spiral_generator():
+    gen = spiral_diagonal_generator()
+    assert next(gen) == (1,)
+    assert next(gen) == (3, 5, 7, 9)
+    assert next(gen) == (13, 17, 21, 25)
+    assert next(gen) == (31, 37, 43, 49)
+
+
+def test_p058():
+    assert p058(0.61) == 3
+    assert p058(0.56) == 5  # 5 in 9 are primes for side length = 5
