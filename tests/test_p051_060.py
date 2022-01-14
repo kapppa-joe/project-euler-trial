@@ -1,4 +1,5 @@
 import pytest
+import numpy as np
 
 from p051_060.p051 import determine_same_digit_group, same_digit
 from p051_060.p052 import are_permutation, has_n_permuted_multiples
@@ -8,6 +9,7 @@ from p051_060.p055 import check_lychrel, reverse_add
 from p051_060.p056 import p056
 from p051_060.p057 import fraction_seq, p057
 from p051_060.p058 import p058, spiral_diagonal_generator
+from p051_060.p059 import Key_Combinations, can_find_words_in_text, looks_like_english
 
 
 def test_p051_same_digit_group():
@@ -191,3 +193,36 @@ def test_p058_spiral_generator():
 def test_p058():
     assert p058(0.61) == 3
     assert p058(0.56) == 5  # 5 in 9 are primes for side length = 5
+
+
+def test_p059_key_combinations():
+    keys_generated = list(Key_Combinations)
+    assert len(keys_generated) == 26 ** 3
+    assert tuple(ord(char) for char in 'abc') in keys_generated
+    assert tuple(ord(char) for char in 'aaa') in keys_generated
+    assert tuple(ord(char) for char in 'cat') in keys_generated
+    assert tuple(ord(char) for char in 'zyx') in keys_generated
+    assert tuple(ord(char) for char in 'xyz') in keys_generated
+    assert tuple(ord(char) for char in 'Abc') not in keys_generated
+
+
+def test_p059_looks_like_english():
+    text = 'Each character on a computer is assigned a unique code and the preferred standard is ASCII (American Standard Code for Information Interchange). For example, uppercase A = 65, asterisk (*) = 42, and lowercase k = 107.'
+    text_arr = np.array([ord(char) for char in text])
+    assert looks_like_english(text_arr) >= 100
+
+    text = 'For unbreakable encryption, the key is the same length as the plain text message, and the key is made up of random bytes. The user would keep the encrypted message and the encryption key in different locations, and without both "halves", it is impossible to decrypt the message.'
+    text_arr = np.array([ord(char) for char in text])
+    assert looks_like_english(text_arr) >= 100
+
+    text = 'dsdsjdijj!(#($%(HNfofkm dfdm  fldksdsjidajidj9u91 u1u9a9dwdjidji dwi0iew0djsnixu9s99!'
+    text_arr = np.array([ord(char) for char in text])
+    assert looks_like_english(text_arr) == 0
+
+
+def test_find_words_in_text():
+    text = 'Your task has been made easy, as the encryption key consists of three lower case characters.'
+    text_arr = np.array([ord(char) for char in text])
+    assert can_find_words_in_text(
+        text_arr, ["task", "has", "been", "made", "difficult"]) == 4
+    assert can_find_words_in_text(text_arr, ["no", "such", "words"]) == 0
