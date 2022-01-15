@@ -10,6 +10,8 @@ from p051_060.p056 import p056
 from p051_060.p057 import fraction_seq, p057
 from p051_060.p058 import p058, spiral_diagonal_generator
 from p051_060.p059 import Key_Combinations, can_find_words_in_text, looks_like_english
+from p051_060.p060 import check_prime_pair, p060, search_graph_for_pairs_set, update_graph
+from util import all_primes_below
 
 
 def test_p051_same_digit_group():
@@ -220,9 +222,64 @@ def test_p059_looks_like_english():
     assert looks_like_english(text_arr) == 0
 
 
-def test_find_words_in_text():
+def test_p059_find_words_in_text():
     text = 'Your task has been made easy, as the encryption key consists of three lower case characters.'
     text_arr = np.array([ord(char) for char in text])
     assert can_find_words_in_text(
         text_arr, ["task", "has", "been", "made", "difficult"]) == 4
     assert can_find_words_in_text(text_arr, ["no", "such", "words"]) == 0
+
+
+def test_p060_check_prime_pair():
+    assert check_prime_pair(3, 7) == True
+    assert check_prime_pair(2, 7) == False
+    assert check_prime_pair(17, 23) == False
+    assert check_prime_pair(3, 109) == True
+    assert check_prime_pair(3, 673) == True
+    assert check_prime_pair(109, 673) == True
+
+
+def test_p060_update_graph():
+    graph = {}
+    for p in all_primes_below(20):
+        graph = update_graph(p, graph)
+    assert graph == {2: set(), 3: {7, 11, 17}, 5: set(), 7: {3, 19},
+                     11: {3}, 13: {19},  17: {3}, 19: {13, 7}}
+
+
+def test_search_graph_for_pairs_set():
+
+    # try search for a set of 2 primes for n < 10
+    graph = {}
+    for p in all_primes_below(10):
+        graph = update_graph(p, graph)
+    output = search_graph_for_pairs_set(
+        graph=graph, wanted_size=2, curr_node=3)
+    assert output == {3, 7}
+
+    output2 = search_graph_for_pairs_set(
+        graph=graph, wanted_size=2, curr_node=2)
+    assert output2 == None  # no such groups found for 2
+
+    # try search for a set of 3 primes for n < 100
+    graph = {}
+    for p in all_primes_below(100):
+        graph = update_graph(p, graph)
+    output3 = search_graph_for_pairs_set(
+        graph=graph, wanted_size=3, curr_node=3)
+    assert output3 == {3, 37, 67}
+
+    # try search for a set of 4 primes for n < 1000
+    graph = {}
+    for p in all_primes_below(1000):
+        graph = update_graph(p, graph)
+    output4 = search_graph_for_pairs_set(
+        graph=graph, wanted_size=4, curr_node=3)
+    assert output4 == {3, 7, 109, 673}
+
+
+def test_p060():
+    assert p060(set_size=2) == sum({3, 7})
+    assert p060(set_size=3) == sum({3, 37, 67})
+    assert p060(set_size=4) == sum({3, 7, 109, 673})
+    assert p060(set_size=5) == sum({13, 5197, 5701, 6733, 8389})

@@ -58,7 +58,7 @@ def all_primes_below(n: int, asc: bool = True) -> Iterable[int]:
         return (i for i in range(n - 1, 1, -1) if isPrime[i])
 
 
-def is_prime(num: int) -> bool:
+def is_prime(num: int, known_prime: list[int] = []) -> bool:
     # check if a number is prime
     if num == 2:
         return True
@@ -66,16 +66,24 @@ def is_prime(num: int) -> bool:
         return False
 
     square_root = round(num ** 0.5)
-    for i in range(3, square_root + 1, 2):
+    if known_prime:
+        factors_to_try = (p for p in known_prime if p <= square_root)
+    else:
+        factors_to_try = range(3, square_root + 1, 2)
+
+    for i in factors_to_try:
         if num % i == 0:
             return False
     return True
 
 
-def prime_generator(limit: int) -> Generator[int, None, None]:
+def prime_generator(start: int = 2, limit: int | float = float('inf'), prime_checker=None) -> Generator[int, None, None]:
     # generate all prime numbers below the limit
-    yield 2
-    i = 3
+    if start == 2:
+        yield 2
+    i = start if start % 2 == 1 else start + 1
+    prime_checker = prime_checker or is_prime
+
     while i < limit:
         if is_prime(i):
             yield i

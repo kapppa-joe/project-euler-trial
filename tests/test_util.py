@@ -22,9 +22,16 @@ def test_is_prime():
     for i in range(1000):
         assert (i in primes_until_1000) == is_prime(i)
 
+    prime_memo = [p for p in primes_until_1000 if p <= 100]
+    primes_below_10000 = list(all_primes_below(10000))
+    for i in range(10_000):
+        assert (i in primes_below_10000) == is_prime(i, known_prime=prime_memo)
+
 
 def test_prime_generator():
-    assert list(prime_generator(1000)) == primes_until_1000
+    assert list(prime_generator(limit=1000)) == primes_until_1000
+    primes_30_to_2000 = [p for p in all_primes_below(2000) if p >= 30]
+    assert list(prime_generator(start=30, limit=2000)) == primes_30_to_2000
 
 
 def test_nth_prime():
