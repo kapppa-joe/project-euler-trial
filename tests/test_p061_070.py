@@ -2,6 +2,7 @@ import random
 import pytest
 
 from p061_070.p061 import first_two_digits, last_two_digits,  make_polygonal_number_dicts, p061, p061_recur, p061_start_recur
+from p061_070.p062 import p062
 
 from polygonal_numbers import polygonal_number_generator
 
@@ -74,3 +75,8 @@ def test_p061():
     assert p061(range(3, 7)) == sum([7021, 2116, 5370, 1653])
     assert p061(range(3, 8)) == sum([2850, 8281, 5017, 1782, 8128])
     assert p061(range(3, 9)) == sum([8256, 5625, 2882, 8128, 2512, 1281])
+
+
+def test_p062():
+    assert p062(3) == 41063625
+    assert p062(5) == 127035954683
