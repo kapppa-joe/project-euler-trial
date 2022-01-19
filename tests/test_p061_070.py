@@ -3,6 +3,7 @@ import pytest
 
 from p061_070.p061 import first_two_digits, last_two_digits,  make_polygonal_number_dicts, p061, p061_recur, p061_start_recur
 from p061_070.p062 import p062
+from p061_070.p064 import count_period, p064
 
 from polygonal_numbers import polygonal_number_generator
 
@@ -80,3 +81,22 @@ def test_p061():
 def test_p062():
     assert p062(3) == 41063625
     assert p062(5) == 127035954683
+
+
+def test_p064_count_period():
+    assert count_period(2) == 1
+    assert count_period(3) == 2
+    assert count_period(4) == 0
+    assert count_period(5) == 1
+    assert count_period(6) == 2
+    assert count_period(7) == 4
+    assert count_period(8) == 2
+    assert count_period(9) == 0
+    assert count_period(10) == 1
+    assert count_period(11) == 2
+    assert count_period(12) == 2
+    assert count_period(13) == 5
+
+
+def test_p064():
+    assert p064(13) == 4

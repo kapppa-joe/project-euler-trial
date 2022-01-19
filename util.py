@@ -10,6 +10,10 @@ def is_even(n: int) -> bool:
     return n & 1 == 0
 
 
+def is_odd(n: int) -> bool:
+    return n & 1 == 1
+
+
 def nth_fib(n: int) -> int:
     # calculate the nth fib number with memoization
     fib_memo = {1: 1, 2: 2}
