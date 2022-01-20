@@ -1,9 +1,11 @@
 import random
 import pytest
+import itertools
 
 from p061_070.p061 import first_two_digits, last_two_digits,  make_polygonal_number_dicts, p061, p061_recur, p061_start_recur
 from p061_070.p062 import p062
 from p061_070.p064 import count_period, p064
+from p061_070.p065 import e_a_terms, p065, sqrt_2_a_terms, expand_inf_fraction
 
 from polygonal_numbers import polygonal_number_generator
 
@@ -100,3 +102,46 @@ def test_p064_count_period():
 
 def test_p064():
     assert p064(13) == 4
+
+
+def test_p065_sqrt_2_a_terms():
+    assert list(itertools.islice(sqrt_2_a_terms(), 10)) == [
+        1, 2, 2, 2, 2,
+        2, 2, 2, 2, 2
+    ]
+
+
+def test_p065_e_a_terms():
+    assert list(itertools.islice(e_a_terms(), 20)) == [
+        2, 1, 2, 1, 1,
+        4, 1, 1, 6, 1,
+        1, 8, 1, 1, 10,
+        1, 1, 12, 1, 1
+    ]
+
+
+def test_p065_expand_inf_fraction():
+    expand_sqrt_2 = expand_inf_fraction(sqrt_2_a_terms())
+    assert next(expand_sqrt_2) == (1, 1)
+    assert next(expand_sqrt_2) == (3, 2)
+    assert next(expand_sqrt_2) == (7, 5)
+    assert next(expand_sqrt_2) == (17, 12)
+    assert next(expand_sqrt_2) == (41, 29)
+
+    first_10_terms_for_sqrt_2 = itertools.islice(
+        expand_inf_fraction(sqrt_2_a_terms()), 10)
+    assert list(first_10_terms_for_sqrt_2) == [
+        (1, 1), (3, 2), (7, 5), (17, 12), (41, 29),
+        (99, 70), (239, 169), (577, 408), (1393, 985), (3363, 2378)]
+
+    expand_e = expand_inf_fraction(e_a_terms())
+    first_10_terms_for_e = itertools.islice(expand_e, 10)
+    assert list(first_10_terms_for_e) == [
+        (2, 1), (3, 1), (8, 3), (11, 4), (19, 7),
+        (87, 32), (106, 39), (193, 71), (1264, 465), (1457, 536)
+    ]
+
+
+def test_p065():
+    assert p065(10) == 17
+    assert p065() == 272
