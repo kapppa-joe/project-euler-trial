@@ -5,9 +5,6 @@ import itertools
 from p061_070.p065 import expand_inf_fraction
 
 
-SquaresBelow10000 = set((i ** 2 for i in range(101)))
-
-
 def p066(upper_limit: int = 1000) -> int:
     square_numbers = set(
         (i ** 2 for i in range(1, floor(sqrt(upper_limit) + 2))))
