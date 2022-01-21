@@ -1,4 +1,5 @@
 import random
+from numpy import sqrt
 import pytest
 import itertools
 
@@ -6,6 +7,7 @@ from p061_070.p061 import first_two_digits, last_two_digits,  make_polygonal_num
 from p061_070.p062 import p062
 from p061_070.p064 import count_period, p064
 from p061_070.p065 import e_a_terms, p065, sqrt_2_a_terms, expand_inf_fraction
+from p061_070.p066 import pells_equation_minimal_x, p066, sqrt_continued_fraction
 
 from polygonal_numbers import polygonal_number_generator
 
@@ -129,7 +131,7 @@ def test_p065_expand_inf_fraction():
     assert next(expand_sqrt_2) == (41, 29)
 
     first_10_terms_for_sqrt_2 = itertools.islice(
-        expand_inf_fraction(sqrt_2_a_terms()), 10)
+        expand_inf_fraction(sqrt_continued_fraction(2)), 10)
     assert list(first_10_terms_for_sqrt_2) == [
         (1, 1), (3, 2), (7, 5), (17, 12), (41, 29),
         (99, 70), (239, 169), (577, 408), (1393, 985), (3363, 2378)]
@@ -145,3 +147,47 @@ def test_p065_expand_inf_fraction():
 def test_p065():
     assert p065(10) == 17
     assert p065() == 272
+
+
+def test_p066_diophantine_minimal_x():
+    assert pells_equation_minimal_x(D=2) == 3
+    assert pells_equation_minimal_x(D=3) == 2
+    assert pells_equation_minimal_x(D=5) == 9
+    assert pells_equation_minimal_x(D=6) == 5
+    assert pells_equation_minimal_x(D=7) == 8
+
+
+Test_cases_for_sqrt_continued_fraction = [
+    (2, [1, 2, 2, 2, 2, 2, 2, 2, 2, 2]),
+    (3, [1, 1, 2, 1, 2, 1, 2, 1, 2, 1]),
+    (4, [2]),
+    (5, [2, 4, 4, 4, 4, 4, 4, 4, 4, 4]),
+    (6, [2, 2, 4, 2, 4, 2, 4, 2, 4, 2]),
+    (7, [2, 1, 1, 1, 4, 1, 1, 1, 4, 1]),
+    (8, [2, 1, 4, 1, 4, 1, 4, 1, 4, 1]),
+    (10, [3, 6, 6, 6, 6, 6, 6, 6, 6, 6]),
+    (11, [3, 3, 6, 3, 6, 3, 6, 3, 6, 3]),
+    (12, [3, 2, 6, 2, 6, 2, 6, 2, 6, 2]),
+    (13, [3, 1, 1, 1, 1, 6, 1, 1, 1, 1]),
+    (23, [4, 1, 3, 1, 8, 1, 3, 1, 8, 1]),
+]
+
+
+@pytest.mark.parametrize("x, first_ten_terms", Test_cases_for_sqrt_continued_fraction)
+def test_p066_sqrt_continued_fraction(x, first_ten_terms):
+    frac = sqrt_continued_fraction(x)
+    assert list(itertools.islice(frac, 10)) == first_ten_terms
+
+
+def test_p066_sqrt_continued_fraction_for_61():
+    frac_sqrt_61 = sqrt_continued_fraction(61)
+    assert list(itertools.islice(frac_sqrt_61, 23)) == [
+        7,
+        1, 4, 3, 1, 2, 2, 1, 3, 4, 1, 14,
+        1, 4, 3, 1, 2, 2, 1, 3, 4, 1, 14,
+    ]
+
+
+def test_p066():
+    assert p066(7) == 5
+    assert p066(100) == 61
