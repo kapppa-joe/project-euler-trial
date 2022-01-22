@@ -9,7 +9,7 @@ class NumberTriangle():
 
     def __init__(self, input_triangle: str):
         self.triangle = [[int(number_str) for number_str in row.split(' ')]
-                         for row in input_triangle.split("\n")]
+                         for row in input_triangle.split("\n") if row]
         self.height = len(self.triangle)
 
         # workout the max_value of each cell in a bottom-top approach.
@@ -40,7 +40,7 @@ class NumberTriangle():
             return (cell for cell in ((row + 1, col), (row + 1, col + 1)))
 
     @cache
-    def max_value(self, row: int, col: int) -> int:
+    def max_value(self, row: int = 0, col: int = 0) -> int:
         """
         return the max value that can be attained starting from a cell to the bottom of triangle 
         """
