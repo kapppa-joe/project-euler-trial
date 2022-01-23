@@ -1,13 +1,14 @@
 import random
-from numpy import sqrt
 import pytest
 import itertools
+import numpy as np
 
 from p061_070.p061 import first_two_digits, last_two_digits,  make_polygonal_number_dicts, p061, p061_recur, p061_start_recur
 from p061_070.p062 import p062
 from p061_070.p064 import count_period, p064
 from p061_070.p065 import e_a_terms, p065, sqrt_2_a_terms, expand_inf_fraction
 from p061_070.p066 import pells_equation_minimal_x, p066, sqrt_continued_fraction
+from p061_070.p068 import PolygonRing, p068
 
 from polygonal_numbers import polygonal_number_generator
 
@@ -191,3 +192,52 @@ def test_p066_sqrt_continued_fraction_for_61():
 def test_p066():
     assert p066(7) == 5
     assert p066(100) == 61
+
+
+def test_p068_next_row_candidates():
+    ring = PolygonRing(3)
+    ring.grid[0] = [4, 3, 2]
+    assert list(ring.next_row_candidates()) == [(6, 2, 1)]
+
+    ring.grid[1] = (6, 2, 1)
+    assert list(ring.next_row_candidates()) == [(5, 1, 3)]
+
+    # test for empty grid
+    ring = PolygonRing(3)
+    assert list(ring.next_row_candidates()) == list(
+        itertools.permutations(range(1, 7), 3))
+
+
+def test_p068_solve_recur_case_3_gon():
+    # test that it can solve from a seeded grid
+    ring = PolygonRing(3)
+    ring.grid[0] = [4, 3, 2]
+    assert list(ring.solve_recur()) == [(4, 3, 2, 6, 2, 1, 5, 1, 3)]
+
+    ring = PolygonRing(3)
+    solutions = set(''.join(str(num) for num in solution)
+                    for solution in ring.solve_recur())
+    assert solutions == {
+        '423531612',
+        '432621513',
+        '235451613',
+        '253631415',
+        '146362524',
+        '164542326',
+        '156264345',
+        '165354246',
+    }
+
+
+def test_p068_solve_recur_case_5_gon():
+    solutions = list(PolygonRing(5).solve_recur())
+    for s in solutions:
+        assert len(s) == 15
+        assert set(s) == set(range(1, 11))
+        arr = np.array(s).reshape(5, 3)
+        assert len(set(arr.sum(axis=1))) == 1
+        assert all(s.count(i) in (1, 2) for i in range(1, 11))
+
+
+def test_p068():
+    assert p068(3) == '432621513'
