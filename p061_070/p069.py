@@ -4,16 +4,25 @@ from util import all_primes_below
 
 UpperLimit = 1_000_000
 
-PrimeList = list(all_primes_below(UpperLimit + 1))
-PrimeSet = set(PrimeList)
+Primes = {p: None for p in all_primes_below(UpperLimit + 1)}
 
 
 def p069(upper_limit: int = UpperLimit):
-    return max(range(2, upper_limit + 1), key=lambda n: n / totient(n))
+    return max(range(2, upper_limit + 1), key=n_over_totient_n)
+
+
+def n_over_totient_n(n: int) -> float:
+    if n in Primes:
+        return n / (n-1)
+    else:
+        product = 1
+        for pf in prime_factors(n):
+            product *= n_over_totient_n(pf)
+        return product
 
 
 def totient(n: int) -> int:
-    if n in PrimeSet:
+    if n in Primes:
         return n - 1
     else:
         product = n
@@ -24,14 +33,14 @@ def totient(n: int) -> int:
 
 @cache
 def prime_factors(n: int) -> set[int]:
-    if n in PrimeSet or n == 1:
+    if n in Primes or n == 1:
         return set()
 
-    for p in PrimeList:
+    for p in Primes:
         if n % p == 0:
             while n % p == 0:
                 n = n // p
-            if n in PrimeSet:
+            if n in Primes:
                 return {n, p}
             else:
                 return prime_factors(n) | {p}
