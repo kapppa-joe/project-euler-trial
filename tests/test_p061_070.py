@@ -9,6 +9,7 @@ from p061_070.p064 import count_period, p064
 from p061_070.p065 import e_a_terms, p065, sqrt_2_a_terms, expand_inf_fraction
 from p061_070.p066 import pells_equation_minimal_x, p066, sqrt_continued_fraction
 from p061_070.p068 import PolygonRing, p068
+from p061_070.p069 import p069, prime_factors, totient
 
 from polygonal_numbers import polygonal_number_generator
 
@@ -241,3 +242,35 @@ def test_p068_solve_recur_case_5_gon():
 
 def test_p068():
     assert p068(3) == '432621513'
+
+
+def test_p069_prime_factors():
+    assert prime_factors(10) == {2, 5}
+    assert prime_factors(36) == {2, 3}
+    assert prime_factors(385787) == {29, 53, 251}
+    assert prime_factors(885789) == {3, 53, 619}
+
+
+P069_totient_function_testcases = [
+    # (n, phi(n))
+    (2, 1),
+    (3, 2),
+    (4, 2),
+    (5, 4),
+    (6, 2),
+    (7, 6),
+    (8, 4),
+    (9, 6),
+    (10, 4),
+    (123456, 41088)
+]
+
+
+@pytest.mark.parametrize("n, expected_output", P069_totient_function_testcases)
+def test_p069_totient(n, expected_output):
+    assert totient(n) == expected_output
+
+
+def test_p069():
+    assert p069(10) == 6
+    assert p069() == 510510
