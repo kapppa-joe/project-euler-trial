@@ -1,6 +1,7 @@
 import functools
 import itertools
 import math
+from re import A
 from typing import Generator, Iterable, Optional
 
 from big_num import BigNum
@@ -311,3 +312,7 @@ def reverse_digits(num: int, base: int = 10) -> int:
 
 def is_palindromic_num(num, base: int = 10) -> int:
     return num == reverse_digits(num, base=base)
+
+
+def is_permutation_of_num(a: int, b: int) -> bool:
+    return sorted(str(a)) == sorted(str(b))

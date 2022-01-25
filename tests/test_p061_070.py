@@ -9,7 +9,8 @@ from p061_070.p064 import count_period, p064
 from p061_070.p065 import e_a_terms, p065, sqrt_2_a_terms, expand_inf_fraction
 from p061_070.p066 import pells_equation_minimal_x, p066, sqrt_continued_fraction
 from p061_070.p068 import PolygonRing, p068
-from p061_070.p069 import n_over_totient_n, p069, prime_factors, totient
+from p061_070.p069 import Totient, p069
+from p061_070.p070 import p070
 
 from polygonal_numbers import polygonal_number_generator
 
@@ -244,11 +245,14 @@ def test_p068():
     assert p068(3) == '432621513'
 
 
+t = Totient()
+
+
 def test_p069_prime_factors():
-    assert prime_factors(10) == {2, 5}
-    assert prime_factors(36) == {2, 3}
-    assert prime_factors(385787) == {29, 53, 251}
-    assert prime_factors(885789) == {3, 53, 619}
+    assert t.prime_factors(10) == {2, 5}
+    assert t.prime_factors(36) == {2, 3}
+    assert t.prime_factors(385787) == {29, 53, 251}
+    assert t.prime_factors(885789) == {3, 53, 619}
 
 
 P069_totient_function_testcases = [
@@ -268,7 +272,7 @@ P069_totient_function_testcases = [
 
 @pytest.mark.parametrize("n, expected_output", P069_totient_function_testcases)
 def test_p069_totient(n, expected_output):
-    assert totient(n) == expected_output
+    assert t.totient(n) == expected_output
 
 
 P069_n_over_totient_function_testcases = [
@@ -288,9 +292,14 @@ P069_n_over_totient_function_testcases = [
 
 @pytest.mark.parametrize("n, expected_output", P069_n_over_totient_function_testcases)
 def test_p069_n_over_totient_function(n, expected_output):
-    assert n_over_totient_n(n) == expected_output
+    assert t.n_over_totient_n(n) == expected_output
 
 
 def test_p069():
     assert p069(10) == 6
     assert p069() == 510510
+
+
+def test_p070():
+    assert p070(100) == 21
+    assert p070() == 8319823

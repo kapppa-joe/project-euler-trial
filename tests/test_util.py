@@ -1,6 +1,6 @@
 import random
 from big_num import BigNum
-from util import all_divisors, count_digits, factorial, first_true, has_even_digit, int_to_digits, is_palindromic_bin, is_pandigital, join_nums, make_prime_checker, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, reverse_digits, rotate_digits, rotate_digits_iter, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
+from util import all_divisors, count_digits, factorial, first_true, has_even_digit, int_to_digits, is_palindromic_bin, is_pandigital, is_permutation_of_num, join_nums, make_prime_checker, nth, nth_fib, all_primes_below, is_prime, nth_prime, pandigital_generator, prime_generator, is_palindromic, is_palindromic_num, gcd, lcm, product, reverse_digits, rotate_digits, rotate_digits_iter, str_to_digits, triangle_number_generator, bignum_factorial, is_sum_of_two_elements
 
 
 def test_nth_fib():
@@ -300,3 +300,12 @@ def test_reverse_digits():
     assert reverse_digits(0b10101110, 2) == (0b01110101)
     assert reverse_digits(0o1237, 8) == (0o7321)
     assert reverse_digits(0x1abf, 16) == (0xfba1)
+
+
+def test_is_permutation_of_num():
+    is_permutation_of_num(1234, 4321) == True
+    is_permutation_of_num(1234, 4322) == False
+    is_permutation_of_num(1123, 1223) == False
+    is_permutation_of_num(1123, 11230) == False
+    is_permutation_of_num(87109, 79180) == True
+    is_permutation_of_num(984827, 274889) == True
