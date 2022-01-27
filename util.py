@@ -316,3 +316,11 @@ def is_palindromic_num(num, base: int = 10) -> int:
 
 def is_permutation_of_num(a: int, b: int) -> bool:
     return sorted(str(a)) == sorted(str(b))
+
+
+def reduce_fraction(n: int, d: int) -> tuple[int, int]:
+    hcf = gcd(n, d)
+    if hcf == 1:
+        return (n, d)
+    else:
+        return (n // hcf, d // hcf)
