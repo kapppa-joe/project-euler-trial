@@ -1,5 +1,5 @@
 from util import gcd, reduce_fraction
-from totient import farey_sequence_start_from_between
+from farey_seq import farey_sequence_start_from_between
 
 
 def median_fraction(n1: int, d1: int, n2: int, d2: int) -> tuple[int, int]:
@@ -11,6 +11,14 @@ def median_fraction(n1: int, d1: int, n2: int, d2: int) -> tuple[int, int]:
 
 def are_neighbours(a: int, b: int, c: int, d: int) -> bool:
     return b * c - a * d == 1
+
+
+def less_than(a: int, b: int, c: int, d: int) -> bool:
+    return a * d - b * c < 0
+
+
+def less_than_or_equal(a: int, b: int, c: int, d: int) -> bool:
+    return a * d - b * c <= 0
 
 
 def p071(numer: int = 3, denom: int = 7, target_d: int = 8) -> tuple[int, int]:
